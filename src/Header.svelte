@@ -1,21 +1,6 @@
 <script>
 </script>
 
-<header>
-	<nav class="parent">
-		<nav class="browsing">
-			<a href="yes">Home</a>
-			<a href="yes">Popular</a>
-			<a href="yes">All</a>
-			<a href="yes">Random</a>
-		</nav>
-		<nav class="options">
-			<a href="yes">Login</a>
-			<a href="yes">Preferences</a>
-		</nav>
-	</nav>
-</header>
-
 <style>
 	header {
 		position: fixed;
@@ -30,6 +15,8 @@
 	nav.parent {
 		display: flex;
 		justify-content: space-between;
+		margin: 0 auto;
+		max-width: 2000px;
 	}
 	nav.parent > nav {
 		display: flex;
@@ -45,3 +32,18 @@
 		}
 	}
 </style>
+
+<header>
+	<nav class="parent">
+		<nav class="browsing">
+			<a href="yes">Home</a>
+			<a href="yes">Popular</a>
+			<a href="yes">All</a>
+			<a href="yes">Random</a>
+		</nav>
+		<nav class="options">
+			<a href="yes">Login</a>
+			<a href="yes">Preferences</a>
+		</nav>
+	</nav>
+</header>

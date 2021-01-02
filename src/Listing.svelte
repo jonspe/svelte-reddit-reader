@@ -1,58 +1,34 @@
 <script>
-	const getPosts = async function() {
+	const getPosts = async function () {
 		return fetch("https://www.reddit.com/.json")
-			.then(response => response.json())
-			.then(data => data.data.children)
-	}
-	const getDurationString = function(from, to) {
+			.then((response) => response.json())
+			.then((data) => data.data.children);
+	};
+	const getDurationString = function (from, to) {
 		const diff = to - from;
 		if (diff < 60000) {
-			return "just now"
+			return "just now";
 		} else if (diff >= 60000 && diff < 3600000) {
-			return `${~~(diff/60000)} minutes ago`
+			return `${~~(diff / 60000)} minutes ago`;
 		} else if (diff >= 3600000 && diff < 216000000) {
-			return `${~~(diff/3600000)} hours ago`
+			return `${~~(diff / 3600000)} hours ago`;
 		} else if (diff >= 216000000) {
-			return `${~~(diff/216000000)} days ago`
+			return `${~~(diff / 216000000)} days ago`;
 		}
-		return "long ago"
-	}
-	const getUtcDate = function(utcSeconds) {
-		const date = new Date(0)
-		date.setUTCSeconds(utcSeconds)
-		return date
-	}
-	let promise = getPosts()
+		return "long ago";
+	};
+	const getUtcDate = function (utcSeconds) {
+		const date = new Date(0);
+		date.setUTCSeconds(utcSeconds);
+		return date;
+	};
+	let promise = getPosts();
 </script>
-
-{#await promise then posts}
-<ul>
-	{#each posts as post}
-	<li>
-		<a href={post.data.url_overridden_by_dest || post.data.url}>
-			<h2>{post.data.title}</h2>
-			<div class="overlay">
-				<p class="score">{post.data.score}</p>
-				<p class="duration">{getDurationString(getUtcDate(post.data.created_utc), new Date())}</p>
-			</div>
-			<img src={post.data.thumbnail} alt=""/>
-		</a>
-		<footer>
-			<a href={"https://reddit.com/u/" + post.data.author}>
-				/u/{post.data.author}
-			</a>
-			<a href="/">
-				{post.data.num_comments} comments
-			</a>
-		</footer>
-	</li>
-	{/each}
-</ul>
-{/await}
 
 <style>
 	ul {
 		column-count: 1;
+		column-gap: 1.4rem;
 		padding: 0;
 	}
 	a {
@@ -65,8 +41,7 @@
 		z-index: 1;
 		color: white;
 		width: calc(100% - 2.4rem);
-		font-weight: bold;
-		background: rgb(0,0,0,0.2);
+		background: rgb(0, 0, 0, 0.25);
 		display: flex;
 		justify-content: space-between;
 	}
@@ -79,7 +54,7 @@
 		box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
 		border-radius: 12px;
 		break-inside: avoid;
-		margin-bottom: 1rem;
+		margin-bottom: 1.4rem;
 		position: relative;
 	}
 	h2 {
@@ -112,14 +87,37 @@
 			column-count: 3;
 		}
 	}
-	@media (min-width: 1900px) {
+	@media (min-width: 1800px) {
 		ul {
 			column-count: 4;
 		}
 	}
-	@media (min-width: 2400px) {
-		ul {
-			column-count: 5;
-		}
-	}
 </style>
+
+{#await promise then posts}
+	<ul>
+		{#each posts as post}
+			<li>
+				<a href={post.data.url_overridden_by_dest || post.data.url}>
+					<h2>{post.data.title}</h2>
+					<div class="overlay">
+						<p class="score">{post.data.score}</p>
+						<p class="duration">
+							{getDurationString(getUtcDate(post.data.created_utc), new Date())}
+						</p>
+					</div>
+					<img src={post.data.thumbnail} alt="" />
+				</a>
+				<footer>
+					<a href={'https://www.reddit.com/u/' + post.data.author}>
+						/u/{post.data.author}
+					</a>
+					<a href={'https://www.reddit.com' + post.data.permalink}>
+						{post.data.num_comments}
+						comments
+					</a>
+				</footer>
+			</li>
+		{/each}
+	</ul>
+{/await}

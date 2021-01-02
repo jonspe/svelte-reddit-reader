@@ -1,16 +1,7 @@
 <script>
-	import Header from "./Header.svelte"
-	import Listing from "./Listing.svelte"
+	import Header from "./Header.svelte";
+	import Listing from "./Listing.svelte";
 </script>
-
-<Header></Header>
-<main>
-	<h1>Simple reddit reader.</h1>
-	<Listing></Listing>
-</main>
-<footer>
-	Made with Svelte, by Joona Perasto. 2021.
-</footer>
 
 <style>
 	:global(body) {
@@ -19,7 +10,8 @@
 	}
 	main {
 		padding: 0 6rem;
-		margin: 6rem 0;
+		margin: 6rem auto;
+		max-width: 2000px;
 	}
 	footer {
 		text-align: center;
@@ -31,3 +23,10 @@
 		}
 	}
 </style>
+
+<Header />
+<main>
+	<h1>Simple reddit reader.</h1>
+	<Listing />
+</main>
+<footer>Made with Svelte, by Joona Perasto. 2021.</footer>
