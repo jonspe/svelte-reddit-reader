@@ -1,9 +1,8 @@
 <script>
-  import Header from './Header.svelte'
-  import Listing from './Listing.svelte'
+  import Header from './components/Header.svelte'
+  import Listing from './components/Listing.svelte'
 </script>
 
-<Header />
 <main>
   <h1>Simple reddit reader.</h1>
   <Listing />
@@ -16,7 +15,7 @@
     background: #f4f4f4;
   }
   main {
-    padding: 0 6rem;
+    padding: 0 8rem;
     margin: 6rem auto;
     max-width: 2000px;
   }
@@ -24,9 +23,14 @@
     text-align: center;
     padding: 1.2rem 0;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 70rem) {
     main {
-      padding: 0 1rem;
+      padding: 0 2rem;
+    }
+  }
+  @media (max-width: 30rem) {
+    main {
+      padding: 0 0.6rem;
     }
   }
 </style>

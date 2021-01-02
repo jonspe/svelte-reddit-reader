@@ -17,3 +17,9 @@ export const getUtcDate = function (utcSeconds) {
   date.setUTCSeconds(utcSeconds)
   return date
 }
+
+export const decodeHtml = function (html) {
+  var txt = document.createElement('textarea')
+  txt.innerHTML = html
+  return txt.value
+}
