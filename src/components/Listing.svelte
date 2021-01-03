@@ -24,7 +24,7 @@
     column-gap: 32px;
     padding: 0;
   }
-  @media (min-width: 50rem) {
+  @media (min-width: 46rem) {
     ul {
       column-count: 2;
     }

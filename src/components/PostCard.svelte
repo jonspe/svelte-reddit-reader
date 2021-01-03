@@ -87,7 +87,7 @@
   }
   .self-content {
     padding: 0 1.2rem;
-    max-height: 24rem;
+    max-height: min(60vh, 640px);
     overflow-y: auto;
     scrollbar-width: thin;
     border-bottom: 1px solid #eee;
@@ -99,10 +99,16 @@
   footer a {
     padding: 1rem 1.2rem;
   }
+  footer a:first-child {
+    padding-right: 0.4rem;
+  }
+  footer a:last-child {
+    padding-left: 0.4rem;
+  }
   img {
     width: 100%;
     height: auto;
-    max-height: 640px;
+    max-height: min(60vh, 640px);
     object-fit: cover;
     display: block;
   }
