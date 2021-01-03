@@ -1,5 +1,5 @@
 <script>
-  import PostCard from './PostCard.svelte'
+  import Card from './Card.svelte'
 
   const getPosts = async function (url) {
     return fetch(`${url}.json`)
@@ -12,6 +12,6 @@
 
 {#await promise then posts}
   {#each posts as post}
-    <PostCard post={post} />
+    <Card post={post} />
   {/each}
 {/await}
