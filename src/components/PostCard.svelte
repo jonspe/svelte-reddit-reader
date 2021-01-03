@@ -40,8 +40,8 @@
     </div>
   {/if}
   <footer>
-    <a href={'https://www.reddit.com/u/' + post.data.author}>
-      /u/{post.data.author}
+    <a href={'https://www.reddit.com/r/' + post.data.subreddit}>
+      /r/{post.data.subreddit}
     </a>
     <a href={'https://www.reddit.com' + post.data.permalink}>
       {post.data.num_comments}
