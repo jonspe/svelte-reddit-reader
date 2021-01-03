@@ -1,5 +1,4 @@
 <script>
-  import Header from './components/Header.svelte'
   import Listing from './components/Listing.svelte'
 </script>
 
