@@ -26,10 +26,7 @@
 <li>
   <a href={post.data.url_overridden_by_dest || post.data.url} target="_blank">
     <h2>{decodeHtml(post.data.title)}</h2>
-    <div
-      class="banner"
-      class:banner-self={post.data.is_self}
-      class:banner-preview={!post.data.is_self}>
+    <div class="banner">
       <span>{post.data.score} points</span>
       <span>{getDurationString(getUtcDate(post.data.created_utc), new Date())}</span>
     </div>
@@ -60,23 +57,27 @@
   li > a {
     display: block;
   }
-  .banner {
-    position: absolute;
+  li {
+    list-style-type: none;
+    background: white;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    break-inside: avoid;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  h2 {
     margin: 0;
-    padding: 0.4rem 1.2rem;
-    z-index: 1;
+    padding: 1rem 1.2rem 0.4rem 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: block;
+  }
+  .banner {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    text-decoration: none;
-  }
-  .banner-preview {
-    color: white;
-    background: rgb(0, 0, 0, 0.25);
-  }
-  .banner-self {
     position: static;
-    margin-top: -0.6rem;
     padding: 0 1.2rem 1.2rem 1.2rem;
     border-bottom: 1px solid #eee;
   }
@@ -90,22 +91,6 @@
     overflow-y: auto;
     scrollbar-width: thin;
     border-bottom: 1px solid #eee;
-  }
-  li {
-    list-style-type: none;
-    background: white;
-    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
-    break-inside: avoid;
-    margin-bottom: 24px;
-    position: relative;
-  }
-  h2 {
-    margin: 0;
-    padding: 1rem 1.2rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    display: block;
   }
   footer {
     display: flex;

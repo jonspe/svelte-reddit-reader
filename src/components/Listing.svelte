@@ -21,7 +21,7 @@
 <style>
   ul {
     column-count: 1;
-    column-gap: 24px;
+    column-gap: 32px;
     padding: 0;
   }
   @media (min-width: 50rem) {

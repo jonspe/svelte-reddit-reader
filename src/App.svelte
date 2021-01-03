@@ -4,7 +4,7 @@
 </script>
 
 <main>
-  <h1>Simple reddit reader.</h1>
+  <h1>frontpage</h1>
   <Listing />
 </main>
 <footer>Made with Svelte, by Joona Perasto. 2021.</footer>
@@ -12,8 +12,11 @@
 <style>
   main {
     padding: 0 8rem;
-    margin: 6rem auto;
+    margin: 8rem auto;
     max-width: 2000px;
+  }
+  h1 {
+    margin: 3rem 0;
   }
   footer {
     text-align: center;
