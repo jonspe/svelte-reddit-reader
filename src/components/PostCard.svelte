@@ -106,4 +106,10 @@
     object-fit: cover;
     display: block;
   }
+
+  @media (max-width: 30rem) {
+    li {
+      margin-bottom: 16px;
+    }
+  }
 </style>

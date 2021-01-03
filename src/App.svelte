@@ -12,7 +12,7 @@
 <style>
   main {
     padding: 0 8rem;
-    margin: 8rem auto;
+    margin: 128px auto;
     max-width: 2000px;
   }
   h1 {
@@ -24,12 +24,12 @@
   }
   @media (max-width: 70rem) {
     main {
-      padding: 0 2rem;
+      padding: 0 32px;
     }
   }
   @media (max-width: 30rem) {
     main {
-      padding: 0 0.6rem;
+      padding: 0 12px;
     }
   }
 </style>
