@@ -11,7 +11,7 @@
     if (post.data.preview !== undefined) {
       const resolutions = post.data.preview.images[0].resolutions
       const imageUrl = resolutions[Math.min(3, resolutions.length - 1)].url
-      return imageUrl.replaceAll('&amp;', '&')
+      return decodeHtml(imageUrl)
     } else if (post.data.thumbnail === 'nsfw') {
       return 'https://www.reddit.com/static/nsfw2.png'
     } else if (post.data.thumbnail === 'default') {
@@ -25,20 +25,20 @@
 
 <li>
   <a href={post.data.url_overridden_by_dest || post.data.url} target="_blank">
-    <h2>{post.data.title}</h2>
+    <h2>{decodeHtml(post.data.title)}</h2>
     <div
-      class="overlay"
-      class:light={post.data.is_self}
-      class:dark={!post.data.is_self}>
-      <p>{post.data.score}</p>
-      <p>{getDurationString(getUtcDate(post.data.created_utc), new Date())}</p>
+      class="banner"
+      class:banner-self={post.data.is_self}
+      class:banner-preview={!post.data.is_self}>
+      <span>{post.data.score} points</span>
+      <span>{getDurationString(getUtcDate(post.data.created_utc), new Date())}</span>
     </div>
     {#if !post.data.is_self}
       <img src={getPostPreviewImage(post)} alt="" style="height: auto" />
     {/if}
   </a>
   {#if post.data.is_self && post.data.selftext_html}
-    <div class="self">
+    <div class="self-content">
       {@html formatSelfText(post.data.selftext_html)}
     </div>
   {/if}
@@ -57,7 +57,10 @@
   a {
     color: black;
   }
-  .overlay {
+  li > a {
+    display: block;
+  }
+  .banner {
     position: absolute;
     margin: 0;
     padding: 0.4rem 1.2rem;
@@ -65,22 +68,24 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    text-decoration: none;
   }
-  .overlay.dark {
+  .banner-preview {
     color: white;
     background: rgb(0, 0, 0, 0.25);
   }
-  .overlay.light {
-    padding-top: 0;
+  .banner-self {
+    position: static;
+    margin-top: -0.6rem;
+    padding: 0 1.2rem 1.2rem 1.2rem;
     border-bottom: 1px solid #eee;
   }
-  .overlay > * {
+  .banner > * {
     margin: 0;
     display: inline-block;
   }
-  .self {
+  .self-content {
     padding: 0 1.2rem;
-    margin-top: 2.1rem;
     max-height: 24rem;
     overflow-y: auto;
     scrollbar-width: thin;

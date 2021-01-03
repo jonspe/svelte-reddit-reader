@@ -10,10 +10,6 @@
 <footer>Made with Svelte, by Joona Perasto. 2021.</footer>
 
 <style>
-  :global(body) {
-    padding: 0;
-    background: #f4f4f4;
-  }
   main {
     padding: 0 8rem;
     margin: 6rem auto;
