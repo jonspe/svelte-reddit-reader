@@ -16,6 +16,8 @@
       return 'https://www.reddit.com/static/nsfw2.png'
     } else if (post.data.thumbnail === 'default') {
       return 'https://www.reddit.com/static/noimage.png'
+    } else if (post.data.thumbnail === 'self') {
+      return 'https://www.reddit.com/static/self_default2.png'
     }
     return post.data.thumbnail
   }
@@ -23,42 +25,51 @@
   export let post
 </script>
 
-<li>
-  <a href={post.data.url_overridden_by_dest || post.data.url} target="_blank">
-    <h2>{decodeHtml(post.data.title)}</h2>
-    <div class="banner">
-      <span>{post.data.score} points</span>
-      <span>{getDurationString(getUtcDate(post.data.created_utc), new Date())}</span>
-    </div>
-    {#if !post.data.is_self}
-      <img src={getPostPreviewImage(post)} alt="" style="height: auto" />
-    {/if}
-  </a>
-  {#if post.data.is_self && post.data.selftext_html}
-    <div class="self-content">
+<article>
+  <header>
+    <a href={post.data.permalink} target="_blank">
+      <h2>{decodeHtml(post.data.title)}</h2>
+      <div class="banner">
+        <span>{post.data.score} points</span>
+        <span>{getDurationString(getUtcDate(post.data.created_utc), new Date())}</span>
+      </div>
+    </a>
+  </header>
+  {#if !post.data.is_self}
+    <section class="preview-content">
+      <a
+        href={post.data.url_overridden_by_dest || post.data.url}
+        target="_blank">
+        <img src={getPostPreviewImage(post)} alt="" />
+      </a>
+    </section>
+  {:else if post.data.is_self && !post.data.selftext_html}
+    <section class="thumbnail-content">
+      <a href={post.data.permalink}>
+        <img src={getPostPreviewImage(post)} alt="" />
+      </a>
+    </section>
+  {:else if post.data.is_self && post.data.selftext_html}
+    <section class="text-content">
       {@html formatSelfText(post.data.selftext_html)}
-    </div>
+    </section>
   {/if}
   <footer>
-    <a href={'https://www.reddit.com/r/' + post.data.subreddit}>
-      /r/{post.data.subreddit}
+    <a
+      href={post.data.subreddit_name_prefixed}>/{post.data.subreddit_name_prefixed}
     </a>
-    <a href={'https://www.reddit.com' + post.data.permalink}>
-      {post.data.num_comments}
-      comments
-    </a>
+    <a href={post.data.permalink}>{post.data.num_comments} comments</a>
   </footer>
-</li>
+</article>
 
 <style>
   a {
     color: black;
   }
-  li > a {
+  article > * > a {
     display: block;
   }
-  li {
-    list-style-type: none;
+  article {
     background: white;
     box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
@@ -78,19 +89,31 @@
     display: flex;
     justify-content: space-between;
     position: static;
-    padding: 0 1.2rem 1.2rem 1.2rem;
-    border-bottom: 1px solid #eee;
+    padding: 0 1.2rem 1rem 1.2rem;
   }
   .banner > * {
     margin: 0;
     display: inline-block;
   }
-  .self-content {
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+  .text-content {
     padding: 0 1.2rem;
-    max-height: min(60vh, 640px);
+    max-height: min(60vh, 560px);
     overflow-y: auto;
     scrollbar-width: thin;
     border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+  }
+  .thumbnail-content img {
+    max-height: min(40vh, 184px);
+  }
+  .preview-content img {
+    max-height: min(60vh, 560px);
   }
   footer {
     display: flex;
@@ -105,16 +128,8 @@
   footer a:last-child {
     padding-left: 0.4rem;
   }
-  img {
-    width: 100%;
-    height: auto;
-    max-height: min(60vh, 640px);
-    object-fit: cover;
-    display: block;
-  }
-
   @media (max-width: 30rem) {
-    li {
+    article {
       margin-bottom: 16px;
     }
   }
