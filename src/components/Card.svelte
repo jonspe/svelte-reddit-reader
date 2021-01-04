@@ -8,18 +8,18 @@
 
   // Gets the best option for preview image considering quality and content type
   const getPostPreviewImage = function (post) {
-    if (post.data.preview !== undefined) {
-      const resolutions = post.data.preview.images[0].resolutions
+    if (post.preview !== undefined) {
+      const resolutions = post.preview.images[0].resolutions
       const imageUrl = resolutions[Math.min(3, resolutions.length - 1)].url
       return decodeHtml(imageUrl)
-    } else if (post.data.thumbnail === 'nsfw') {
+    } else if (post.thumbnail === 'nsfw') {
       return 'https://www.reddit.com/static/nsfw2.png'
-    } else if (post.data.thumbnail === 'default') {
+    } else if (post.thumbnail === 'default') {
       return 'https://www.reddit.com/static/noimage.png'
-    } else if (post.data.thumbnail === 'self') {
+    } else if (post.thumbnail === 'self') {
       return 'https://www.reddit.com/static/self_default2.png'
     }
-    return post.data.thumbnail
+    return post.thumbnail
   }
 
   export let post
@@ -27,38 +27,34 @@
 
 <article>
   <header>
-    <a href={post.data.permalink} target="_blank">
-      <h2>{decodeHtml(post.data.title)}</h2>
+    <a href={post.permalink} target="_blank">
+      <h2>{decodeHtml(post.title)}</h2>
       <div class="banner">
-        <span>{post.data.score} points</span>
-        <span>{getDurationString(getUtcDate(post.data.created_utc), new Date())}</span>
+        <span>{post.score} points</span>
+        <span>{getDurationString(getUtcDate(post.created_utc), new Date())}</span>
       </div>
     </a>
   </header>
-  {#if !post.data.is_self}
+  {#if !post.is_self}
     <section class="preview-content">
-      <a
-        href={post.data.url_overridden_by_dest || post.data.url}
-        target="_blank">
+      <a href={post.url_overridden_by_dest || post.url} target="_blank">
         <img src={getPostPreviewImage(post)} alt="" />
       </a>
     </section>
-  {:else if post.data.is_self && !post.data.selftext_html}
+  {:else if post.is_self && !post.selftext_html}
     <section class="thumbnail-content">
-      <a href={post.data.permalink}>
+      <a href={post.permalink}>
         <img src={getPostPreviewImage(post)} alt="" />
       </a>
     </section>
-  {:else if post.data.is_self && post.data.selftext_html}
+  {:else if post.is_self && post.selftext_html}
     <section class="text-content">
-      {@html formatSelfText(post.data.selftext_html)}
+      {@html formatSelfText(post.selftext_html)}
     </section>
   {/if}
   <footer>
-    <a
-      href={post.data.subreddit_name_prefixed}>/{post.data.subreddit_name_prefixed}
-    </a>
-    <a href={post.data.permalink}>{post.data.num_comments} comments</a>
+    <a href={post.subreddit_name_prefixed}>/{post.subreddit_name_prefixed} </a>
+    <a href={post.permalink}>{post.num_comments} comments</a>
   </footer>
 </article>
 

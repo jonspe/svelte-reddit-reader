@@ -4,7 +4,7 @@
   const getPosts = async function (url) {
     return fetch(`${url}.json`)
       .then((response) => response.json())
-      .then((data) => data.data.children)
+      .then((data) => data.data.children.map((datamodel) => datamodel.data))
   }
 
   let lastRefreshed = 0
