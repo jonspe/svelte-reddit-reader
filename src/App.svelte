@@ -1,76 +1,56 @@
 <script>
-  import Listing from './components/Listing.svelte';
+  import regexparam from 'regexparam';
+  import { exec } from './util';
   import Post from './components/Post.svelte';
+  import Listing from './components/Listing.svelte';
 
-  let postVisible = false;
-  let selectedPostUrl;
+  let listingPath;
+  let postPath;
 
-  const handlePostView = (e) => {
-    selectedPostUrl = e.detail.permalink;
-    postVisible = true;
+  const handlePostClosed = () => {
+    postPath = null;
+    window.location.hash = listingPath;
   };
-  const handlePostClose = () => {
-    postVisible = false;
+
+  const routes = {
+    frontpage: regexparam('/'),
+    subreddit: regexparam('/r/:subreddit'),
+    post: regexparam('/r/:subreddit/comments/:id/:title'),
   };
+
+  const handleRoutingLogic = () => {
+    const path = window.location.href.split('#')[1] || '/';
+
+    let foundPath = Object.values(routes).reduce(
+      (a, b) => a || b.pattern.test(path),
+      false
+    );
+    if (!foundPath) return;
+
+    if (!listingPath && routes.post.pattern.test(path)) {
+      const params = exec(path, routes.post);
+      listingPath = `/r/${params.subreddit}`;
+      postPath = path;
+    } else if (!routes.post.pattern.test(path)) {
+      listingPath = path;
+      postPath = null;
+    } else {
+      postPath = path;
+    }
+  };
+
+  handleRoutingLogic();
 </script>
 
+<svelte:window on:hashchange={handleRoutingLogic} />
+
 <header>
-  <h1>frontpage</h1>
+  <h1>reddit reader</h1>
 </header>
 <main>
-  <Post
-    permalink={selectedPostUrl}
-    visible={postVisible}
-    on:close={handlePostClose} />
-  <Listing
-    url="https://www.reddit.com/r/apexlegends/"
-    on:view={handlePostView} />
+  {#if postPath}
+    <Post url={postPath} on:close={handlePostClosed} />
+  {/if}
+  <Listing url={listingPath} />
 </main>
 <footer>Made with Svelte, by Joona Perasto. 2021.</footer>
-
-<style>
-  header {
-    padding: 0 128px;
-    margin: 128px auto 64px auto;
-    max-width: 2000px;
-  }
-  main {
-    padding: 0 128px;
-    margin: 64px auto;
-    max-width: 2000px;
-    column-count: 1;
-    column-gap: 32px;
-  }
-  footer {
-    text-align: center;
-    padding: 1.2rem 0;
-  }
-  @media (max-width: 70rem) {
-    main,
-    header {
-      padding: 0 32px;
-    }
-  }
-  @media (max-width: 30rem) {
-    main,
-    header {
-      padding: 0 12px;
-    }
-  }
-
-  @media (min-width: 46rem) {
-    main {
-      column-count: 2;
-    }
-  }
-  @media (min-width: 90rem) {
-    main {
-      column-count: 3;
-    }
-  }
-  @media (min-width: 120rem) {
-    main {
-      column-count: 4;
-    }
-  }
-</style>

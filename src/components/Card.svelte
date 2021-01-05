@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import {
     getDurationString,
     getUtcDate,
@@ -7,18 +6,11 @@
     formatRedditHtml,
   } from '../util';
 
-  const dispatch = createEventDispatcher();
-  const viewPost = (e) => {
-    dispatch('view', {
-      permalink: post.permalink,
-    });
-  };
-
   // Gets the best option for preview image considering quality and content type
   const getPostPreviewImage = (post) => {
     if (post.preview !== undefined) {
       const resolutions = post.preview.images[0].resolutions;
-      const imageUrl = resolutions[Math.min(3, resolutions.length - 1)].url;
+      const imageUrl = resolutions[Math.min(2, resolutions.length - 1)].url;
       return decodeHtml(imageUrl);
     } else if (post.thumbnail === 'nsfw') {
       return 'https://www.reddit.com/static/nsfw2.png';
@@ -36,7 +28,7 @@
 
 <article>
   <header>
-    <a href="javascript: void(0);" on:click={viewPost}>
+    <a href={'#' + post.permalink}>
       <h2>{decodeHtml(post.title)}</h2>
       <div class="banner">
         <span>{post.score} points</span>
@@ -57,12 +49,12 @@
       </a>
     </section>
   {:else if post.is_self && post.selftext_html}
-    <section class="container">
+    <section class="container text-content">
       {@html formatRedditHtml(post.selftext_html)}
     </section>
   {/if}
   <footer>
-    <a href={post.subreddit_name_prefixed}>/{post.subreddit_name_prefixed} </a>
+    <a href={'#/r/' + post.subreddit}>/r/{post.subreddit}</a>
     <a href={post.permalink}>{post.num_comments} comments</a>
   </footer>
 </article>

@@ -24,11 +24,22 @@ export const decodeHtml = function (html) {
   return txt.value;
 };
 
-export const getRedditUrl = function (url) {
-  return 'https://www.reddit.com/' + url;
+export const getRedditJsonUrl = function (path) {
+  return `https://www.reddit.com${path}.json`;
 };
 
 // Decodes HTML string from Reddit to display, removes empty paragraphs
 export const formatRedditHtml = function (html) {
   return decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''));
+};
+
+// Execute regexparam, get params
+export const exec = function (path, result) {
+  let i = 0;
+  let out = {};
+  let matches = result.pattern.exec(path);
+  while (i < result.keys.length) {
+    out[result.keys[i]] = matches[++i] || null;
+  }
+  return out;
 };

@@ -80,6 +80,13 @@ button:focus {
 .text-content a {
   color: red;
 }
+.text-content ul {
+  padding-left: 1.6rem;
+}
+.text-content ul li {
+  margin-bottom: 0.4rem;
+}
+
 .text-content blockquote {
   background: #e8e8e8;
   font-style: italic;
@@ -108,4 +115,33 @@ button:focus {
 
 ul {
   list-style: initial;
+}
+
+body > header {
+  padding: 0 128px;
+  margin: 128px auto 64px auto;
+  max-width: 2000px;
+}
+body > main {
+  padding: 0 128px;
+  margin: 64px auto;
+  max-width: 2000px;
+}
+body > footer {
+  text-align: center;
+  padding: 1.2rem 0;
+}
+
+@media (max-width: 70rem) {
+  body > main,
+  body > header {
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 30rem) {
+  body > main,
+  body > header {
+    padding: 0 12px;
+  }
 }

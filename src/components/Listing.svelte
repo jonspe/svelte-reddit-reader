@@ -1,11 +1,6 @@
 <script>
   import Card from './Card.svelte';
-
-  const fetchPostListing = async (url) => {
-    return fetch(`${url}.json`)
-      .then((response) => response.json())
-      .then((data) => data.data.children.map((datamodel) => datamodel.data));
-  };
+  import { fetchPostListing } from '../api';
 
   let lastRefreshed = 0;
   const handleScroll = (event) => {
@@ -25,8 +20,32 @@
 
 <svelte:window on:scroll={handleScroll} />
 
-{#await promise then posts}
-  {#each posts as post}
-    <Card post={post} on:view />
-  {/each}
-{/await}
+<div>
+  {#await promise then posts}
+    {#each posts as post}
+      <Card post={post} />
+    {/each}
+  {/await}
+</div>
+
+<style>
+  div {
+    column-count: 1;
+    column-gap: 32px;
+  }
+  @media (min-width: 46rem) {
+    div {
+      column-count: 2;
+    }
+  }
+  @media (min-width: 90rem) {
+    div {
+      column-count: 3;
+    }
+  }
+  @media (min-width: 120rem) {
+    div {
+      column-count: 4;
+    }
+  }
+</style>
