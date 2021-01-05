@@ -31,6 +31,7 @@
   };
 
   export let post;
+  $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
 </script>
 
 <article>
@@ -39,7 +40,7 @@
       <h2>{decodeHtml(post.title)}</h2>
       <div class="banner">
         <span>{post.score} points</span>
-        <span>{getDurationString(getUtcDate(post.created_utc), new Date())}</span>
+        <span>{postDate}</span>
       </div>
     </a>
   </header>

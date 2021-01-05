@@ -1,7 +1,8 @@
 <script>
-  import { formatRedditHtml } from '../util'
+  import { formatRedditHtml, getDurationString, getUtcDate } from '../util';
 
-  export let comment
+  export let comment;
+  $: postDate = getDurationString(getUtcDate(comment.created_utc), new Date());
 </script>
 
 <li>
@@ -10,6 +11,7 @@
       class="author"
       href={'https://www.reddit.com/u/' + comment.author}>{comment.author}</a>
     <span class="score">{comment.score} points</span>
+    <span class="time">{postDate}</span>
   </header>
   <section class="text-content">
     {@html formatRedditHtml(comment.body_html)}
