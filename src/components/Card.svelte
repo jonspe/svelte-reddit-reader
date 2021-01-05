@@ -1,33 +1,41 @@
 <script>
-  import { getDurationString, getUtcDate, decodeHtml } from '../util.js'
+  import { createEventDispatcher } from 'svelte';
+  import {
+    getDurationString,
+    getUtcDate,
+    decodeHtml,
+    formatRedditHtml,
+  } from '../util';
 
-  // Decodes HTML string from Reddit to display, removes empty paragraphs
-  const formatSelfText = function (html) {
-    return decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''))
-  }
+  const dispatch = createEventDispatcher();
+  const viewPost = (e) => {
+    dispatch('view', {
+      permalink: post.permalink,
+    });
+  };
 
   // Gets the best option for preview image considering quality and content type
-  const getPostPreviewImage = function (post) {
+  const getPostPreviewImage = (post) => {
     if (post.preview !== undefined) {
-      const resolutions = post.preview.images[0].resolutions
-      const imageUrl = resolutions[Math.min(3, resolutions.length - 1)].url
-      return decodeHtml(imageUrl)
+      const resolutions = post.preview.images[0].resolutions;
+      const imageUrl = resolutions[Math.min(3, resolutions.length - 1)].url;
+      return decodeHtml(imageUrl);
     } else if (post.thumbnail === 'nsfw') {
-      return 'https://www.reddit.com/static/nsfw2.png'
+      return 'https://www.reddit.com/static/nsfw2.png';
     } else if (post.thumbnail === 'default') {
-      return 'https://www.reddit.com/static/noimage.png'
+      return 'https://www.reddit.com/static/noimage.png';
     } else if (post.thumbnail === 'self') {
-      return 'https://www.reddit.com/static/self_default2.png'
+      return 'https://www.reddit.com/static/self_default2.png';
     }
-    return post.thumbnail
-  }
+    return post.thumbnail;
+  };
 
-  export let post
+  export let post;
 </script>
 
 <article>
   <header>
-    <a href={post.permalink} target="_blank">
+    <a href="javascript: void(0);" on:click={viewPost}>
       <h2>{decodeHtml(post.title)}</h2>
       <div class="banner">
         <span>{post.score} points</span>
@@ -49,7 +57,7 @@
     </section>
   {:else if post.is_self && post.selftext_html}
     <section class="text-content">
-      {@html formatSelfText(post.selftext_html)}
+      {@html formatRedditHtml(post.selftext_html)}
     </section>
   {/if}
   <footer>
@@ -59,9 +67,6 @@
 </article>
 
 <style>
-  a {
-    color: black;
-  }
   article > * > a {
     display: block;
   }

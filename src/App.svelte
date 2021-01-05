@@ -1,12 +1,28 @@
 <script>
-  import Listing from './components/Listing.svelte'
+  import Listing from './components/Listing.svelte';
+  import Post from './components/Post.svelte';
+
+  let postVisible = false;
+  let selectedPostUrl;
+
+  const handlePostView = (e) => {
+    selectedPostUrl = e.detail.permalink;
+    postVisible = true;
+  };
+  const handlePostClose = () => {
+    postVisible = false;
+  };
 </script>
 
 <header>
   <h1>frontpage</h1>
 </header>
 <main>
-  <Listing />
+  <Post
+    permalink={selectedPostUrl}
+    visible={postVisible}
+    on:close={handlePostClose} />
+  <Listing url="https://www.reddit.com/" on:view={handlePostView} />
 </main>
 <footer>Made with Svelte, by Joona Perasto. 2021.</footer>
 

@@ -19,6 +19,7 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 a:hover {
@@ -63,4 +64,22 @@ button:not(:disabled):active {
 
 button:focus {
   border-color: #666;
+}
+
+.text-content *:first-child {
+  margin-top: 0;
+}
+.text-content *:last-child {
+  margin-bottom: 0;
+}
+
+.text-content a {
+  color: red;
+}
+
+.text-content blockquote {
+  background: #e8e8e8;
+  font-style: italic;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
