@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import Comment from './Comment.svelte';
-  import { getRedditUrl } from '../util';
+  import { getRedditUrl, decodeHtml } from '../util';
 
   const dispatch = createEventDispatcher();
   const closePost = () => dispatch('close');
@@ -30,12 +30,12 @@
 </script>
 
 {#if visible}
-  <div class="modal" on:click={closePost}>
-    <div class="content" on:click|stopPropagation>
+  <div class="modal-backdrop" on:click={closePost}>
+    <div on:click|stopPropagation>
       <header>
-        <h2>{post.title}</h2>
+        <h2>{decodeHtml(post.title)}</h2>
       </header>
-      <section class="comments">
+      <section class="container">
         <ul>
           {#each comments as comment}
             {#if comment.kind === 't1'}
@@ -52,25 +52,6 @@
 {/if}
 
 <style>
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 4;
-    background: #00000088;
-  }
-  .modal > * {
-    background: white;
-    margin: 16px;
-    max-width: 40rem;
-    border-radius: 12px;
-  }
-
   header {
     padding: 32px;
   }
@@ -85,13 +66,12 @@
     display: block;
     padding: 1rem 1.2rem;
   }
-  .comments {
-    padding: 32px;
+  .container {
+    padding: 1.6rem 2rem;
     max-height: 640px;
-    overflow: auto;
     background: #f4f4f4;
   }
-  .comments > ul {
+  .container > ul {
     padding: 0;
     margin: 0;
   }

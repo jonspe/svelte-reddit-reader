@@ -22,7 +22,9 @@
     permalink={selectedPostUrl}
     visible={postVisible}
     on:close={handlePostClose} />
-  <Listing url="https://www.reddit.com/" on:view={handlePostView} />
+  <Listing
+    url="https://www.reddit.com/r/apexlegends/"
+    on:view={handlePostView} />
 </main>
 <footer>Made with Svelte, by Joona Perasto. 2021.</footer>
 

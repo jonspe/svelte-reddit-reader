@@ -45,19 +45,19 @@
     </a>
   </header>
   {#if !post.is_self}
-    <section class="preview-content">
+    <section class="image-container">
       <a href={post.url_overridden_by_dest || post.url} target="_blank">
         <img src={getPostPreviewImage(post)} alt="" />
       </a>
     </section>
   {:else if post.is_self && !post.selftext_html}
-    <section class="thumbnail-content">
+    <section class="image-container">
       <a href={post.permalink}>
         <img src={getPostPreviewImage(post)} alt="" />
       </a>
     </section>
   {:else if post.is_self && post.selftext_html}
-    <section class="text-content">
+    <section class="container">
       {@html formatRedditHtml(post.selftext_html)}
     </section>
   {/if}
@@ -77,45 +77,36 @@
     border-radius: 12px;
     break-inside: avoid;
     margin-bottom: 32px;
-    position: relative;
   }
   h2 {
     margin: 0;
     padding: 1rem 1.2rem 0.4rem 1.2rem;
     font-size: 1.2rem;
     font-weight: 600;
-    display: block;
   }
   .banner {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    position: static;
     padding: 0 1.2rem 1rem 1.2rem;
   }
   .banner > * {
     margin: 0;
     display: inline-block;
   }
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-  }
-  .text-content {
-    padding: 0 1.2rem;
+  .container {
+    padding: 1rem 1.2rem;
     max-height: min(60vh, 560px);
-    overflow-y: auto;
     scrollbar-width: thin;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
   }
-  .thumbnail-content img {
-    max-height: min(40vh, 184px);
-  }
-  .preview-content img {
+  .image-container img {
     max-height: min(60vh, 560px);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
   }
   footer {
     display: flex;
