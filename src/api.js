@@ -1,9 +1,10 @@
 import { getRedditJsonUrl } from './util';
 
-export const fetchPostListing = async (url) => {
-  return fetch(getRedditJsonUrl(url))
+export const fetchPostListing = async (url, after) => {
+  const afterAppend = after ? `?count=25&after=${after}` : '';
+  return fetch(getRedditJsonUrl(url) + afterAppend)
     .then((response) => response.json())
-    .then((data) => data.data.children.map((datamodel) => datamodel.data));
+    .then((data) => data.data);
 };
 
 export const fetchPostWithComments = async (url) => {
