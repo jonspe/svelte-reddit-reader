@@ -55,7 +55,7 @@
   {/if}
   <footer>
     <a href={'#/r/' + post.subreddit}>/r/{post.subreddit}</a>
-    <a href={post.permalink}>{post.num_comments} comments</a>
+    <a href={'#' + post.permalink}>{post.num_comments} comments</a>
   </footer>
 </article>
 

@@ -35,8 +35,9 @@
       </ul>
     </section>
     <footer>
-      <a href={'#/r/' + post.subreddit}><span>/r/{post.subreddit}</span></a>
-      <a href="#/">another link</a>
+      <a
+        href={'https://www.reddit.com/u/' + post.author}><span>/u/{post.author}</span></a>
+      <a on:click={closePost}>close post</a>
     </footer>
   </article>
 </div>

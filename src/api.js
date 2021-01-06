@@ -1,8 +1,9 @@
-import { getRedditJsonUrl } from './util';
+import { getRedditJsonUrl, appendQuery } from './util';
 
 export const fetchPostListing = async (url, after) => {
-  const afterAppend = after ? `?count=25&after=${after}` : '';
-  return fetch(getRedditJsonUrl(url) + afterAppend)
+  const afterQuery = after ? `count=25&after=${after}` : '';
+  const finalUrl = appendQuery(getRedditJsonUrl(url), afterQuery);
+  return fetch(finalUrl)
     .then((response) => response.json())
     .then((data) => data.data);
 };

@@ -11,7 +11,6 @@
       currentTime - lastRefreshed > 2000 &&
       window.innerHeight + window.pageYOffset >= document.body.offsetHeight
     ) {
-      console.log('Bottom reached! Load more!');
       const lastPromise = await promises[promises.length - 1];
       promises = promises.concat(fetchPostListing(url, lastPromise.after));
       lastRefreshed = currentTime;

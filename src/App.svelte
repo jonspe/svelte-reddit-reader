@@ -13,8 +13,8 @@
   };
 
   const routes = {
-    frontpage: regexparam('/'),
-    subreddit: regexparam('/r/:subreddit'),
+    frontpage: regexparam('/:sort?'),
+    subreddit: regexparam('/r/:subreddit/:sort?'),
     post: regexparam('/r/:subreddit/comments/:id/:title'),
   };
 
@@ -40,12 +40,13 @@
   };
 
   handleRoutingLogic();
+  $: pageTitle = exec(listingPath, routes.subreddit).subreddit || 'frontpage';
 </script>
 
 <svelte:window on:hashchange={handleRoutingLogic} />
 
 <header>
-  <h1>reddit reader</h1>
+  <h1>{pageTitle}</h1>
 </header>
 <main>
   {#if postPath}

@@ -25,7 +25,8 @@ export const decodeHtml = function (html) {
 };
 
 export const getRedditJsonUrl = function (path) {
-  return `https://www.reddit.com${path}.json`;
+  const [url, query] = path.split('?');
+  return `https://www.reddit.com${url}.json?${query}`;
 };
 
 // Decodes HTML string from Reddit to display, removes empty paragraphs
@@ -38,8 +39,18 @@ export const exec = function (path, result) {
   let i = 0;
   let out = {};
   let matches = result.pattern.exec(path);
+  if (!matches) return {};
   while (i < result.keys.length) {
     out[result.keys[i]] = matches[++i] || null;
   }
   return out;
+};
+
+export const appendQuery = function (url, query) {
+  if (!query) {
+    return url;
+  } else if (url.includes('?')) {
+    return `${url}&${query}`;
+  }
+  return `${url}?${query}`;
 };
