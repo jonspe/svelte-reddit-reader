@@ -104,7 +104,6 @@ button:focus {
   top: 0;
   bottom: 0;
   z-index: 4;
-  background: #00000088;
 }
 
 ul {
@@ -118,7 +117,7 @@ body > header {
 }
 body > main {
   padding: 0 128px;
-  margin: 64px auto;
+  margin: 64px auto 480px auto;
   max-width: 2000px;
 }
 body > footer {

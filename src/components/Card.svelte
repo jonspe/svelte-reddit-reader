@@ -1,4 +1,5 @@
 <script>
+  import { fly } from 'svelte/transition';
   import {
     getDurationString,
     getUtcDate,
@@ -23,10 +24,12 @@
   };
 
   export let post;
+  export let index;
   $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
+  $: animationDelay = index * 26;
 </script>
 
-<article>
+<article in:fly={{ y: 100, duration: 600, delay: animationDelay }}>
   <header>
     <a href={'#' + post.permalink}>
       <h2>{decodeHtml(post.title)}</h2>
@@ -92,7 +95,6 @@
     scrollbar-width: thin;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
-    background: #f8f8f8;
   }
   .image-container img {
     max-height: min(50vh, 560px);

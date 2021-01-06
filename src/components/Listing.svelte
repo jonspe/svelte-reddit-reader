@@ -1,34 +1,34 @@
 <script>
+  import { onDestroy } from 'svelte';
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
 
-  const scrolledPromises = [];
-
-  let lastRefreshed = 0;
-  const handleScroll = async (event) => {
+  let lastRefreshed = Date.now();
+  const scrollInterval = setInterval(async () => {
     const currentTime = Date.now();
     if (
-      currentTime - lastRefreshed > 2000 &&
+      currentTime - lastRefreshed > 4000 &&
       window.innerHeight + window.pageYOffset >= document.body.offsetHeight
     ) {
       const lastPromise = await promises[promises.length - 1];
       promises = promises.concat(fetchPostListing(url, lastPromise.after));
       lastRefreshed = currentTime;
     }
-  };
+  }, 500);
+
+  onDestroy(() => clearInterval(scrollInterval));
 
   export let url;
   $: promise = fetchPostListing(url);
   $: promises = [promise];
+  $: url, (lastRefreshed = Date.now());
 </script>
-
-<svelte:window on:scroll={handleScroll} />
 
 {#each promises as promise}
   {#await promise then listing}
     <div>
-      {#each listing.children as post}
-        <Card post={post.data} />
+      {#each listing.children as post, i}
+        <Card post={post.data} index={i} />
       {/each}
     </div>
   {/await}

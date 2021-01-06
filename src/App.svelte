@@ -37,6 +37,7 @@
     } else if (!routes.post.pattern.test(path)) {
       listingPath = path;
       postPath = null;
+      document.documentElement.scrollTop = 0;
     } else {
       postPath = path;
     }

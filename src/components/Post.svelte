@@ -1,4 +1,5 @@
 <script>
+  import { fly, fade } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
   import { decodeHtml } from '../util';
   import { fetchPostWithComments } from '../api';
@@ -12,7 +13,7 @@
 </script>
 
 <div class="modal-backdrop" on:click|stopPropagation={closePost}>
-  <article on:click|stopPropagation>
+  <article on:click|stopPropagation transition:fly={{ y: 60, duration: 300 }}>
     <header>
       <h2>
         {#await promise}
@@ -78,6 +79,7 @@
     max-width: 40rem;
     width: 100%;
     border-radius: 12px;
+    box-shadow: 0 0 0 8000px #00000066;
   }
   @media (max-width: 30rem) {
     article {
