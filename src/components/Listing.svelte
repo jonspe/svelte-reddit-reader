@@ -3,12 +3,16 @@
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
 
+  const FETCH_MARGIN = 1080;
+  const FETCH_DELAY = 3000;
+
   let lastRefreshed = Date.now();
   const scrollInterval = setInterval(async () => {
     const currentTime = Date.now();
     if (
-      currentTime - lastRefreshed > 4000 &&
-      window.innerHeight + window.pageYOffset >= document.body.offsetHeight
+      currentTime - lastRefreshed > FETCH_DELAY &&
+      window.innerHeight + window.pageYOffset >=
+        document.body.offsetHeight - FETCH_MARGIN
     ) {
       const lastPromise = await promises[promises.length - 1];
       promises = promises.concat(fetchPostListing(url, lastPromise.after));
