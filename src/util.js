@@ -26,7 +26,11 @@ export const decodeHtml = function (html) {
 
 export const getRedditJsonUrl = function (path) {
   const [url, query] = path.split('?');
-  return `https://www.reddit.com${url}.json?${query}`;
+  if (query) {
+    return `https://www.reddit.com${url}.json?${query}`;
+  } else {
+    return `https://www.reddit.com${path}.json`;
+  }
 };
 
 // Decodes HTML string from Reddit to display, removes empty paragraphs

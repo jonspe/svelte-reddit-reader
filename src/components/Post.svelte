@@ -7,36 +7,41 @@
   const dispatch = createEventDispatcher();
   const closePost = () => dispatch('close');
 
-  let post = {};
-  let comments = [];
-
   export let url;
-
-  $: if (url) {
-    fetchPostWithComments(url).then((data) => {
-      post = data.post;
-      comments = data.comments;
-    });
-  }
+  $: promise = fetchPostWithComments(url);
 </script>
 
 <div class="modal-backdrop" on:click|stopPropagation={closePost}>
   <article on:click|stopPropagation>
     <header>
-      <h2>{decodeHtml(post.title)}</h2>
+      <h2>
+        {#await promise}
+          Loading...
+        {:then data}
+          {decodeHtml(data.post.title)}
+        {/await}
+      </h2>
     </header>
     <section class="container">
-      <ul>
-        {#each comments as comment}
-          {#if comment.kind === 't1'}
-            <Comment comment={comment.data} />
-          {/if}
-        {/each}
-      </ul>
+      {#await promise}
+        Loading comments...
+      {:then data}
+        <ul>
+          {#each data.comments as comment}
+            {#if comment.kind === 't1'}
+              <Comment comment={comment.data} />
+            {/if}
+          {/each}
+        </ul>
+      {/await}
     </section>
     <footer>
-      <a
-        href={'https://www.reddit.com/u/' + post.author}><span>/u/{post.author}</span></a>
+      {#await promise}
+        <a href="javascript: void(0);">/u/...</a>
+      {:then data}
+        <a
+          href={'https://www.reddit.com/u/' + data.post.author}><span>/u/{data.post.author}</span></a>
+      {/await}
       <a on:click={closePost}>close post</a>
     </footer>
   </article>
@@ -44,9 +49,10 @@
 
 <style>
   header {
-    padding: 32px;
+    padding: 24px 32px;
   }
   h2 {
+    font-size: 1.2rem;
     margin: 0;
   }
   footer {
@@ -59,11 +65,29 @@
   }
   .container {
     padding: 1.6rem 2rem;
-    max-height: 640px;
+    height: min(60vh, 640px);
     background: #f4f4f4;
   }
   .container > ul {
     padding: 0;
     margin: 0;
+  }
+  article {
+    background: white;
+    margin: 16px;
+    max-width: 40rem;
+    width: 100%;
+    border-radius: 12px;
+  }
+  @media (max-width: 30rem) {
+    article {
+      margin: 8px;
+      width: 100%;
+    }
+    .container,
+    header,
+    footer > * {
+      padding: 16px;
+    }
   }
 </style>

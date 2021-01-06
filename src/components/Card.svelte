@@ -88,13 +88,14 @@
   }
   .container {
     padding: 1rem 1.2rem;
-    max-height: min(60vh, 560px);
+    max-height: min(50vh, 560px);
     scrollbar-width: thin;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
+    background: #f8f8f8;
   }
   .image-container img {
-    max-height: min(60vh, 560px);
+    max-height: min(50vh, 560px);
     width: 100%;
     height: auto;
     object-fit: cover;

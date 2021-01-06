@@ -15,7 +15,10 @@
   const routes = {
     frontpage: regexparam('/:sort?'),
     subreddit: regexparam('/r/:subreddit/:sort?'),
-    post: regexparam('/r/:subreddit/comments/:id/:title'),
+    post: regexparam('/r/:subreddit/comments/:postid/:title'),
+    // TODO: Implement comment and user views
+    comment: regexparam('/r/:subreddit/comments/:postid/:title/:commentid'),
+    user: regexparam('/user/:sort?'),
   };
 
   const handleRoutingLogic = () => {

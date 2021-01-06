@@ -106,12 +106,6 @@ button:focus {
   z-index: 4;
   background: #00000088;
 }
-.modal-backdrop > * {
-  background: white;
-  margin: 16px;
-  max-width: 40rem;
-  border-radius: 12px;
-}
 
 ul {
   list-style: initial;
