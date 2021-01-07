@@ -9,28 +9,31 @@
 
   // Gets the best option for preview image considering quality and content type
   const getPostPreviewImage = (post) => {
+    const thumb = { width: 300, height: 200 };
     if (post.preview !== undefined) {
-      const image = post.preview.images[0];
-      const res = image.resolutions;
-      const imageUrl =
-        res.length !== 0
-          ? res[Math.min(2, res.length - 1)].url
-          : image.source.url;
-      return decodeHtml(imageUrl);
+      const imageObj = post.preview.images[0];
+      const res = imageObj.resolutions;
+      const image =
+        res.length !== 0 ? res[Math.min(2, res.length - 1)] : image.source;
+      return { ...image, src: decodeHtml(image.url) };
     } else if (post.thumbnail === 'nsfw') {
-      return 'https://www.reddit.com/static/nsfw2.png';
+      return { src: 'https://www.reddit.com/static/nsfw2.png', ...thumb };
     } else if (post.thumbnail === 'default') {
-      return 'https://www.reddit.com/static/noimage.png';
+      return { src: 'https://www.reddit.com/static/noimage.png', ...thumb };
     } else if (post.thumbnail === 'self') {
-      return 'https://www.reddit.com/static/self_default2.png';
+      return {
+        src: 'https://www.reddit.com/static/self_default2.png',
+        ...thumb,
+      };
     }
-    return post.thumbnail;
+    return { url: post.thumbnail, height: 200 };
   };
 
   export let post;
   export let index;
   $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
   $: animationDelay = index * 26;
+  $: preview = getPostPreviewImage(post);
 </script>
 
 <article in:fly={{ y: 100, duration: 600, delay: animationDelay }}>
@@ -46,14 +49,12 @@
   {#if !post.is_self}
     <section class="image-container">
       <a href={post.url_overridden_by_dest || post.url} target="_blank">
-        <img src={getPostPreviewImage(post)} alt="" />
+        <img {...preview} alt="" />
       </a>
     </section>
   {:else if post.is_self && !post.selftext_html}
     <section class="image-container">
-      <a href={post.permalink}>
-        <img src={getPostPreviewImage(post)} alt="" />
-      </a>
+      <a href={post.permalink}> <img {...preview} alt="" /> </a>
     </section>
   {:else if post.is_self && post.selftext_html}
     <section class="container text-content">
