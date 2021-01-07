@@ -3,7 +3,7 @@
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
 
-  const FETCH_MARGIN = 1080;
+  const FETCH_MARGIN = 1800;
   const FETCH_DELAY = 3000;
 
   let lastRefreshed = Date.now();
