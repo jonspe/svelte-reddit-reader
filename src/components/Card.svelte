@@ -32,7 +32,7 @@
         src: 'https://www.reddit.com/static/self_default2.png',
       };
     }
-    return { ...thumb, url: post.thumbnail };
+    return { ...thumb, src: post.thumbnail };
   }
 </script>
 
