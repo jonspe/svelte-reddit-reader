@@ -7,33 +7,33 @@
     formatRedditHtml,
   } from '../util';
 
+  export let post;
+  export let index = 0;
+  $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
+  $: animationDelay = index * 26;
+  $: preview = getPostPreviewImage(post);
+
   // Gets the best option for preview image considering quality and content type
-  const getPostPreviewImage = (post) => {
+  function getPostPreviewImage(post) {
     const thumb = { width: 300, height: 200 };
     if (post.preview !== undefined) {
       const imageObj = post.preview.images[0];
       const res = imageObj.resolutions;
       const image =
-        res.length !== 0 ? res[Math.min(2, res.length - 1)] : image.source;
+        res.length !== 0 ? res[Math.min(2, res.length - 1)] : imageObj.source;
       return { ...image, src: decodeHtml(image.url) };
     } else if (post.thumbnail === 'nsfw') {
-      return { src: 'https://www.reddit.com/static/nsfw2.png', ...thumb };
+      return { ...thumb, src: 'https://www.reddit.com/static/nsfw2.png' };
     } else if (post.thumbnail === 'default') {
-      return { src: 'https://www.reddit.com/static/noimage.png', ...thumb };
+      return { ...thumb, src: 'https://www.reddit.com/static/noimage.png' };
     } else if (post.thumbnail === 'self') {
       return {
-        src: 'https://www.reddit.com/static/self_default2.png',
         ...thumb,
+        src: 'https://www.reddit.com/static/self_default2.png',
       };
     }
-    return { url: post.thumbnail, height: 200 };
-  };
-
-  export let post;
-  export let index;
-  $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
-  $: animationDelay = index * 26;
-  $: preview = getPostPreviewImage(post);
+    return { ...thumb, url: post.thumbnail };
+  }
 </script>
 
 <article in:fly={{ y: 100, duration: 600, delay: animationDelay }}>
