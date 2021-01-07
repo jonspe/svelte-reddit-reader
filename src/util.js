@@ -58,3 +58,11 @@ export const appendQuery = function (url, query) {
   }
   return `${url}?${query}`;
 };
+
+export const promiseState = function (p) {
+  const t = {};
+  return Promise.race([p, t]).then(
+    (v) => (v === t ? 'pending' : 'fulfilled'),
+    () => 'rejected'
+  );
+};

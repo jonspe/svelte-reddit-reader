@@ -2,23 +2,32 @@
   import { onDestroy } from 'svelte';
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
+  import { promiseState } from '../util';
 
-  const FETCH_MARGIN = 1800;
-  const FETCH_DELAY = 3000;
+  const FETCH_MARGIN = 1600;
+  const FETCH_DELAY = 4000;
+  const FETCH_INTERVAL = 400;
 
-  let lastRefreshed = Date.now();
+  const isScrolledToBottom = () => {
+    return (
+      window.innerHeight + window.pageYOffset >=
+      document.body.offsetHeight - FETCH_MARGIN
+    );
+  };
+
+  let lastRefreshed;
   const scrollInterval = setInterval(async () => {
     const currentTime = Date.now();
     if (
       currentTime - lastRefreshed > FETCH_DELAY &&
-      window.innerHeight + window.pageYOffset >=
-        document.body.offsetHeight - FETCH_MARGIN
+      isScrolledToBottom() &&
+      (await promiseState(promises[promises.length - 1])) === 'fulfilled'
     ) {
-      const lastPromise = await promises[promises.length - 1];
-      promises = promises.concat(fetchPostListing(url, lastPromise.after));
+      const lastListing = await promises[promises.length - 1];
+      promises = promises.concat(fetchPostListing(url, lastListing.after));
       lastRefreshed = currentTime;
     }
-  }, 500);
+  }, FETCH_INTERVAL);
 
   onDestroy(() => clearInterval(scrollInterval));
 
