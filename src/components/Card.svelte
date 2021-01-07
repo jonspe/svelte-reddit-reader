@@ -10,8 +10,12 @@
   // Gets the best option for preview image considering quality and content type
   const getPostPreviewImage = (post) => {
     if (post.preview !== undefined) {
-      const resolutions = post.preview.images[0].resolutions;
-      const imageUrl = resolutions[Math.min(2, resolutions.length - 1)].url;
+      const image = post.preview.images[0];
+      const res = image.resolutions;
+      const imageUrl =
+        res.length !== 0
+          ? res[Math.min(2, res.length - 1)].url
+          : image.source.url;
       return decodeHtml(imageUrl);
     } else if (post.thumbnail === 'nsfw') {
       return 'https://www.reddit.com/static/nsfw2.png';
