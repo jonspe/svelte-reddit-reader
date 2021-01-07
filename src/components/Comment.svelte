@@ -37,7 +37,7 @@
     margin-bottom: 1rem;
   }
   header {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
   }
   .author {
     font-weight: bold;

@@ -67,7 +67,7 @@ button:focus {
 }
 
 .container {
-  overflow-y: auto;
+  overflow-y: scroll !important;
   overflow-wrap: break-word;
 }
 .container *:first-child {
@@ -85,6 +85,18 @@ button:focus {
 }
 .text-content ul li {
   margin-bottom: 0.4rem;
+}
+.text-content p {
+  margin: 0.3rem 0;
+}
+.text-content h1 {
+  font-size: 1.3rem;
+}
+.text-content h2 {
+  font-size: 1.2rem;
+}
+.text-content h3 {
+  font-size: 1.1rem;
 }
 
 .text-content blockquote {
@@ -104,6 +116,7 @@ button:focus {
   top: 0;
   bottom: 0;
   z-index: 4;
+  padding: 16px;
 }
 
 ul {
@@ -136,5 +149,8 @@ body > footer {
   body > main,
   body > header {
     padding: 0 12px;
+  }
+  .modal-backdrop {
+    padding: 8px;
   }
 }

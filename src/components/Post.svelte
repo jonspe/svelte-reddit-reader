@@ -1,5 +1,6 @@
 <script>
-  import { fly, fade } from 'svelte/transition';
+  import { fly, slide } from 'svelte/transition';
+  import { quartInOut } from 'svelte/easing';
   import { createEventDispatcher } from 'svelte';
   import { decodeHtml } from '../util';
   import { fetchPostWithComments } from '../api';
@@ -23,11 +24,13 @@
         {/await}
       </h2>
     </header>
-    <section class="container">
+    <section>
       {#await promise}
-        Loading comments...
+        <div class="container">Loading comments...</div>
       {:then data}
-        <ul>
+        <ul
+          class="container"
+          in:slide={{ delay: -360, duration: 1000, easing: quartInOut }}>
           {#each data.comments as comment}
             {#if comment.kind === 't1'}
               <Comment comment={comment.data} />
@@ -36,6 +39,7 @@
         </ul>
       {/await}
     </section>
+
     <footer>
       {#await promise}
         <a href="javascript: void(0);">/u/...</a>
@@ -64,18 +68,20 @@
     display: block;
     padding: 1rem 1.2rem;
   }
-  .container {
-    padding: 1.6rem 2rem;
-    height: min(60vh, 640px);
+  section {
     background: #f4f4f4;
   }
-  .container > ul {
-    padding: 0;
+  .container {
+    padding: 1.6rem 2rem !important;
+    min-height: 4.2rem;
+    max-height: min(60vh, 640px);
+    overflow-y: scroll;
+  }
+  ul {
     margin: 0;
   }
   article {
     background: white;
-    margin: 16px;
     max-width: 40rem;
     width: 100%;
     border-radius: 12px;
@@ -83,13 +89,15 @@
   }
   @media (max-width: 30rem) {
     article {
-      margin: 8px;
       width: 100%;
     }
-    .container,
     header,
     footer > * {
       padding: 16px;
+    }
+    .container {
+      padding: 1rem !important;
+      min-height: 3.2rem;
     }
   }
 </style>
