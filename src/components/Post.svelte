@@ -19,6 +19,8 @@
           Loading...
         {:then data}
           {decodeHtml(data.post.title)}
+        {:catch err}
+          <span style="color: red">Post not found</span>
         {/await}
       </h2>
     </header>
@@ -33,8 +35,14 @@
             {#if comment.kind === 't1'}
               <Comment comment={comment.data} />
             {/if}
+          {:else}
+            <li>No comments to load.</li>
           {/each}
         </ul>
+      {:catch err}
+        <div class="container" style="color: red">
+          The requested post could not be found.
+        </div>
       {/await}
     </section>
 
@@ -43,6 +51,8 @@
         <span>...</span>
       {:then data}
         <a use:link href={'/user/' + data.post.author}>/u/{data.post.author}</a>
+      {:catch err}
+        <span />
       {/await}
       <a use:link href={$listingPath}>close post</a>
     </footer>
@@ -65,6 +75,11 @@
     display: block;
     padding: 1rem 1.2rem;
   }
+  footer > *:first-child {
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   section {
     background: #f4f4f4;
   }
@@ -76,6 +91,9 @@
   }
   ul {
     margin: 0;
+  }
+  li {
+    list-style-type: none;
   }
   article {
     background: white;
@@ -93,8 +111,8 @@
       padding: 16px;
     }
     .container {
-      padding: 1rem !important;
       min-height: 3.2rem;
+      padding: 1rem !important;
     }
   }
 </style>

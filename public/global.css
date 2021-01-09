@@ -154,3 +154,34 @@ body > footer {
     padding: 8px;
   }
 }
+
+.card-columns {
+  column-count: 1;
+  column-gap: 16px;
+  margin-bottom: 16px;
+}
+.card-columns > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+@media (min-width: 30rem) {
+  .card-columns {
+    column-gap: 32px;
+    margin-bottom: 32px;
+  }
+}
+@media (min-width: 46rem) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+@media (min-width: 90rem) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+@media (min-width: 120rem) {
+  .card-columns {
+    column-count: 4;
+  }
+}

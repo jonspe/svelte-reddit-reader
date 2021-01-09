@@ -1,3 +1,5 @@
+import { onDestroy } from 'svelte';
+
 export const getDurationString = function (from, to) {
   const diff = to - from;
   if (diff < 60000) {
@@ -68,10 +70,10 @@ export const appendQuery = function (url, query) {
   return `${url}?${query}`;
 };
 
-export const promiseState = function (p) {
-  const t = {};
-  return Promise.race([p, t]).then(
-    (v) => (v === t ? 'pending' : 'fulfilled'),
-    () => 'rejected'
-  );
-};
+export function onInterval(callback, milliseconds) {
+  const interval = setInterval(callback, milliseconds);
+
+  onDestroy(() => {
+    clearInterval(interval);
+  });
+}

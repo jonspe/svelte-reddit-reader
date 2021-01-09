@@ -110,7 +110,7 @@
     padding: 1rem 1.2rem;
   }
   .image-container img {
-    max-height: min(50vh, 560px);
+    max-height: min(45vh, 560px);
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -120,14 +120,13 @@
     display: flex;
     justify-content: space-between;
   }
-  footer a {
+  footer > a {
     padding: 1rem 1.2rem;
   }
-  footer a:first-child {
-    padding-right: 0.4rem;
-  }
-  footer a:last-child {
-    padding-left: 0.4rem;
+  footer > a:first-child {
+    max-width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   @media (max-width: 30rem) {
     article {

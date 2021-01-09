@@ -1,9 +1,9 @@
 <script>
-  import { onDestroy } from 'svelte';
+  import { fade } from 'svelte/transition';
+  import { link } from 'svelte-spa-router';
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
-  import { promiseState } from '../util';
-  import { fade } from 'svelte/transition';
+  import { onInterval } from '../util';
 
   const FETCH_MARGIN = 1600;
   const FETCH_DELAY = 4000;
@@ -16,57 +16,61 @@
     );
   };
 
-  let lastRefreshed;
-  const scrollInterval = setInterval(async () => {
+  let lastRefreshed = Date.now();
+  let fetching = true;
+
+  const afterFetch = (result) => {
+    fetching = false;
+    lastRefreshed = Date.now();
+    return Promise.resolve(result);
+  };
+
+  onInterval(async () => {
     const currentTime = Date.now();
     if (
       currentTime - lastRefreshed > FETCH_DELAY &&
       isScrolledToBottom() &&
-      (await promiseState(promises[promises.length - 1])) === 'fulfilled'
+      !fetching
     ) {
       const lastListing = await promises[promises.length - 1];
-      promises = promises.concat(fetchPostListing(url, lastListing.after));
-      lastRefreshed = currentTime;
+      if (lastListing) {
+        if (lastListing.after) {
+          lastRefreshed = currentTime;
+          promises = promises.concat(
+            fetchPostListing(url, lastListing.after).then(afterFetch)
+          );
+        } else {
+          fetching = true;
+          promises = promises.concat(Promise.reject(Error('end')));
+        }
+      }
     }
   }, FETCH_INTERVAL);
 
-  onDestroy(() => clearInterval(scrollInterval));
-
   export let url;
-  $: promise = fetchPostListing(url);
+  $: promise = fetchPostListing(url).then(afterFetch);
   $: promises = [promise];
   $: url, (lastRefreshed = Date.now());
 </script>
 
 {#each promises as promise}
   {#await promise then listing}
-    <div out:fade>
+    <div class="card-columns" out:fade>
       {#each listing.children as post, i}
         <Card post={post.data} index={i} />
       {/each}
     </div>
+  {:catch err}
+    <span style="color: red">
+      {#if err.reason === 'banned'}
+        This subreddit has been banned.
+      {:else if err.message === 'empty'}
+        This subreddit is empty.
+      {:else if err.message === 'end'}
+        No more posts to load.
+      {:else}An error occurred fetching the subreddit listing. {err}{/if}
+    </span>
+    <br />
+    <a use:link href="/">Return to frontpage</a>
   {/await}
 {/each}
-
-<style>
-  div {
-    column-count: 1;
-    column-gap: 32px;
-    margin-bottom: 32px;
-  }
-  @media (min-width: 46rem) {
-    div {
-      column-count: 2;
-    }
-  }
-  @media (min-width: 90rem) {
-    div {
-      column-count: 3;
-    }
-  }
-  @media (min-width: 120rem) {
-    div {
-      column-count: 4;
-    }
-  }
-</style>
