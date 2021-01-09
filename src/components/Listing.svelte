@@ -3,6 +3,7 @@
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
   import { promiseState } from '../util';
+  import { fade } from 'svelte/transition';
 
   const FETCH_MARGIN = 1600;
   const FETCH_DELAY = 4000;
@@ -39,7 +40,7 @@
 
 {#each promises as promise}
   {#await promise then listing}
-    <div>
+    <div out:fade>
       {#each listing.children as post, i}
         <Card post={post.data} index={i} />
       {/each}
