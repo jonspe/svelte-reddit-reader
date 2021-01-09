@@ -38,6 +38,15 @@ export const formatRedditHtml = function (html) {
   return decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''));
 };
 
+// Test if any of the patterns in routes matches path, and return that route
+export const testAny = function (path, routes) {
+  for (const key in routes) {
+    if (routes[key].pattern.test(path)) {
+      return routes[key];
+    }
+  }
+};
+
 // Execute regexparam, get params
 export const exec = function (path, result) {
   let i = 0;

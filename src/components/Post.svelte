@@ -1,19 +1,17 @@
 <script>
   import { fly, slide } from 'svelte/transition';
   import { quartInOut } from 'svelte/easing';
-  import { createEventDispatcher } from 'svelte';
   import { decodeHtml } from '../util';
   import { fetchPostWithComments } from '../api';
+  import { listingPath } from '../stores';
+  import { link, push } from 'svelte-spa-router';
   import Comment from './Comment.svelte';
-
-  const dispatch = createEventDispatcher();
-  const closePost = () => dispatch('close');
 
   export let url;
   $: promise = fetchPostWithComments(url);
 </script>
 
-<div class="modal-backdrop" on:click|stopPropagation={closePost}>
+<div class="modal-backdrop" on:click={() => push($listingPath)}>
   <article on:click|stopPropagation transition:fly={{ y: 60, duration: 300 }}>
     <header>
       <h2>
@@ -42,12 +40,12 @@
 
     <footer>
       {#await promise}
-        <a href="javascript: void(0);">/u/...</a>
+        <span>...</span>
       {:then data}
-        <a
-          href={'https://www.reddit.com/u/' + data.post.author}><span>/u/{data.post.author}</span></a>
+        <a href={'https://www.reddit.com/user/' + data.post.author}>by
+          {data.post.author}</a>
       {/await}
-      <a on:click={closePost}>close post</a>
+      <a use:link href={$listingPath}>close post</a>
     </footer>
   </article>
 </div>
