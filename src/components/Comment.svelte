@@ -1,5 +1,6 @@
 <script>
   import { formatRedditHtml, getDurationString, getUtcDate } from '../util';
+  import { link } from 'svelte-spa-router';
 
   export let comment;
   $: postDate = getDurationString(getUtcDate(comment.created_utc), new Date());
@@ -7,9 +8,14 @@
 
 <li>
   <header>
-    <a
-      class="author"
-      href={'https://www.reddit.com/u/' + comment.author}>{comment.author}</a>
+    {#if comment.author === '[deleted]'}
+      <span class="author">[deleted]</span>
+    {:else}
+      <a
+        use:link
+        class="author"
+        href={'/user/' + comment.author}>{comment.author}</a>
+    {/if}
     <span class="score">{comment.score} points</span>
     <span class="time">{postDate}</span>
   </header>

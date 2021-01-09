@@ -42,8 +42,7 @@
       {#await promise}
         <span>...</span>
       {:then data}
-        <a href={'https://www.reddit.com/user/' + data.post.author}>by
-          {data.post.author}</a>
+        <a use:link href={'/user/' + data.post.author}>/u/{data.post.author}</a>
       {/await}
       <a use:link href={$listingPath}>close post</a>
     </footer>
