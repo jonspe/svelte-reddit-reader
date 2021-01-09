@@ -32,18 +32,20 @@
       isScrolledToBottom() &&
       !fetching
     ) {
-      const lastListing = await promises[promises.length - 1];
-      if (lastListing) {
-        if (lastListing.after) {
-          lastRefreshed = currentTime;
-          promises = promises.concat(
-            fetchPostListing(url, lastListing.after).then(afterFetch)
-          );
-        } else {
-          fetching = true;
-          promises = promises.concat(Promise.reject(Error('end')));
+      try {
+        const lastListing = await promises[promises.length - 1];
+        if (lastListing) {
+          if (lastListing.after) {
+            lastRefreshed = currentTime;
+            promises = promises.concat(
+              fetchPostListing(url, lastListing.after).then(afterFetch)
+            );
+          } else {
+            fetching = true;
+            promises = promises.concat(Promise.reject(Error('end')));
+          }
         }
-      }
+      } catch {}
     }
   }, FETCH_INTERVAL);
 
