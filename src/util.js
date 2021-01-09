@@ -37,7 +37,10 @@ export const getRedditJsonUrl = function (path) {
 
 // Decodes HTML string from Reddit to display, removes empty paragraphs
 export const formatRedditHtml = function (html) {
-  return decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''));
+  return decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''))
+    .replaceAll('href="https://www.reddit.com/r/', 'href="#/r/')
+    .replaceAll('href="/r/', 'href="#/r/')
+    .replaceAll('href="r/"', 'href="#/r/');
 };
 
 // Test if any of the patterns in routes matches path, and return that route
