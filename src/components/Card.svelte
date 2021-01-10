@@ -8,6 +8,7 @@
   } from '../util';
 
   export let post;
+  export let kind;
   export let index = 0;
   $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
   $: animationDelay = index * 26;
@@ -43,30 +44,38 @@
 <article in:fly={{ y: 100, duration: 600, delay: animationDelay }}>
   <header>
     <a href={'#' + post.permalink}>
-      <h2>{decodeHtml(post.title)}</h2>
+      <h2>{decodeHtml(post.title || post.link_title)}</h2>
       <div class="banner">
         <span>{post.score} points</span>
         <span>{postDate}</span>
       </div>
     </a>
   </header>
-  {#if !post.is_self}
-    <section class="image-container">
-      <a href={post.url_overridden_by_dest || post.url} target="_blank">
-        <img {...preview} alt="" />
-      </a>
-    </section>
-  {:else if post.is_self && !post.selftext_html}
-    <section class="image-container">
-      <a href={post.permalink}> <img {...preview} alt="" /> </a>
-    </section>
-  {:else if post.is_self && post.selftext_html}
+  {#if kind === 't1'}
     <section class="container">
       <div class="text-content">
-        {@html formatRedditHtml(post.selftext_html)}
+        {@html formatRedditHtml(post.body_html)}
       </div>
     </section>
-  {/if}
+  {:else if kind === 't3'}
+    {#if !post.is_self}
+      <section class="image-container">
+        <a href={post.url_overridden_by_dest || post.url} target="_blank">
+          <img {...preview} alt="" />
+        </a>
+      </section>
+    {:else if post.is_self && !post.selftext_html}
+      <section class="image-container">
+        <a href={post.permalink}> <img {...preview} alt="" /> </a>
+      </section>
+    {:else if post.is_self && post.selftext_html}
+      <section class="container">
+        <div class="text-content">
+          {@html formatRedditHtml(post.selftext_html)}
+        </div>
+      </section>
+    {/if}
+  {:else}Unknown type{/if}
   <footer>
     <a href={'#/r/' + post.subreddit}>/r/{post.subreddit}</a>
     <a href={'#' + post.permalink}>{post.num_comments} comments</a>

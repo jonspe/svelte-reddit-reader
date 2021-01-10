@@ -59,7 +59,7 @@
   {#await promise then listing}
     <div class="card-columns" out:fade>
       {#each listing.children as post, i}
-        <Card post={post.data} index={i} />
+        <Card post={post.data} kind={post.kind} index={i} />
       {/each}
     </div>
   {:catch err}
