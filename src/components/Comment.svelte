@@ -15,7 +15,7 @@
 </script>
 
 <li>
-  <header on:click={toggleCollapsed}>
+  <header>
     {#if comment.author === '[deleted]'}
       <span class="author">[deleted]</span>
     {:else}
