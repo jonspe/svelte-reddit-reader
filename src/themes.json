@@ -1,0 +1,71 @@
+{
+  "pictures": [
+    "pics",
+    "EarthPorn",
+    "aww",
+    "cats",
+    "dogs"
+  ],
+  "text": [
+    "AskReddit",
+    "AskScience",
+    "AskWomen",
+    "AskMen",
+    "AskHistorians",
+    "AskEngineers",
+    "Bestof",
+    "TIFU",
+    "OutOfTheLoop",
+    "TipOfMyTongue",
+    "ExplainItLikeImFive",
+    "talesfromtechsupport",
+    "talesfromretail",
+    "Glitch_in_the_Matrix",
+    "SubredditDrama",
+    "letsnotmeet",
+    "Nosleep"
+  ],
+  "technology": [
+    "technology",
+    "pcmasterrace",
+    "buildapc",
+    "talesfromtechsupport",
+    "SelfDrivingCars",
+    "gadgets",
+    "homeautomation",
+    "hardware",
+    "InternetIsBeautiful",
+    "Amd",
+    "nvidia",
+    "intel",
+    "iiiiiiitttttttttttt"
+  ],
+  "games": [
+    "Games",
+    "gaming",
+    "darksouls",
+    "darksouls2",
+    "darksouls3",
+    "apexlegends",
+    "2007scape",
+    "runescape"
+  ],
+  "phones": [
+    "android",
+    "ios",
+    "apple",
+    "oneplus",
+    "huawei"
+  ],
+  "cute": [
+    "aww",
+    "cats",
+    "dogs"
+  ],
+  "memes": [
+    "memes",
+    "dankmemes",
+    "wholesomememes",
+    "me_irl"
+  ]
+}

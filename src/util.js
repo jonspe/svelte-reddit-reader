@@ -50,6 +50,7 @@ export const testAny = function (path, routes) {
       return routes[key];
     }
   }
+  return false;
 };
 
 // Execute regexparam, get params

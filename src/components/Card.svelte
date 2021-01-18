@@ -1,5 +1,6 @@
 <script>
   import { fly } from 'svelte/transition';
+  import { isMultiListing } from '../stores';
   import {
     getDurationString,
     getUtcDate,
@@ -14,6 +15,8 @@
   $: animationDelay = index * 26;
   $: preview = getPostPreviewImage(post);
 
+  const PREVIEW_QUALITY = 3;
+
   // Gets the best option for preview image considering quality and content type
   function getPostPreviewImage(post) {
     const thumb = { width: 300, height: 200 };
@@ -21,7 +24,9 @@
       const imageObj = post.preview.images[0];
       const res = imageObj.resolutions;
       const image =
-        res.length !== 0 ? res[Math.min(2, res.length - 1)] : imageObj.source;
+        res.length !== 0
+          ? res[Math.min(PREVIEW_QUALITY, res.length - 1)]
+          : imageObj.source;
       return {
         width: image.width,
         height: image.height,
@@ -77,7 +82,9 @@
     {/if}
   {:else}Unknown type{/if}
   <footer>
-    <a href={'#/r/' + post.subreddit}>/r/{post.subreddit}</a>
+    {#if $isMultiListing}
+      <a href={'#/r/' + post.subreddit}>/r/{post.subreddit}</a>
+    {:else}<a href={'#/user/' + post.author}>/u/{post.author}</a>{/if}
     <a href={'#' + post.permalink}>{post.num_comments} comments</a>
   </footer>
 </article>

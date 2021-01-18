@@ -1,7 +1,7 @@
 <script>
   import Post from './components/Post.svelte';
   import Listing from './components/Listing.svelte';
-  import { listingPath, postPath } from './stores';
+  import { listingFetchPath, postPath } from './stores';
 </script>
 
 <header>
@@ -11,6 +11,6 @@
   {#if $postPath}
     <Post url={$postPath} />
   {/if}
-  <Listing url={$listingPath} />
+  <Listing url={$listingFetchPath} />
 </main>
 <footer>Made with Svelte, by Joona Perasto. 2021.</footer>
