@@ -4,6 +4,7 @@
   import Card from './Card.svelte';
   import { fetchPostListing } from '../api';
   import { onInterval } from '../util';
+  import { isMultiListing } from '../stores';
 
   const FETCH_MARGIN = 1600;
   const FETCH_DELAY = 4000;
@@ -59,7 +60,11 @@
   {#await promise then listing}
     <div class="card-columns" out:fade>
       {#each listing.children as post, i}
-        <Card post={post.data} kind={post.kind} index={i} />
+        <Card
+          post={post.data}
+          kind={post.kind}
+          showSubreddit={$isMultiListing}
+          index={i} />
       {/each}
     </div>
   {:catch err}

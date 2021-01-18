@@ -6,6 +6,6 @@
   "singleQuote": true,
   "svelteSortOrder": "scripts-markup-styles",
   "svelteBracketNewLine": false,
-  "svelteAllowShorthand": false,
+  "svelteAllowShorthand": true,
   "svelteIndentScriptAndStyle": true
 }

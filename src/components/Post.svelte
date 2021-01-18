@@ -50,7 +50,7 @@
       {#await promise}
         <span>...</span>
       {:then data}
-        <a use:link href={'/user/' + data.post.author}>/u/{data.post.author}</a>
+        <a use:link href={'/user/' + data.post.author}>by {data.post.author}</a>
       {:catch err}
         <span />
       {/await}

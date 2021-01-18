@@ -1,6 +1,5 @@
 <script>
   import { fly } from 'svelte/transition';
-  import { isMultiListing } from '../stores';
   import {
     getDurationString,
     getUtcDate,
@@ -10,6 +9,7 @@
 
   export let post;
   export let kind;
+  export let showSubreddit;
   export let index = 0;
   $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
   $: animationDelay = index * 26;
@@ -82,9 +82,9 @@
     {/if}
   {:else}Unknown type{/if}
   <footer>
-    {#if $isMultiListing}
-      <a href={'#/r/' + post.subreddit}>/r/{post.subreddit}</a>
-    {:else}<a href={'#/user/' + post.author}>/u/{post.author}</a>{/if}
+    {#if showSubreddit}
+      <a href={'#/r/' + post.subreddit}>at {post.subreddit}</a>
+    {:else}<a href={'#/user/' + post.author}>by {post.author}</a>{/if}
     <a href={'#' + post.permalink}>{post.num_comments} comments</a>
   </footer>
 </article>
@@ -138,12 +138,14 @@
   }
   footer > a {
     padding: 1rem 1.2rem;
+    white-space: nowrap;
   }
   footer > a:first-child {
-    max-width: 45%;
+    flex: 0 1 auto;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   @media (max-width: 30rem) {
     article {
       margin-bottom: 16px;
