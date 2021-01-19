@@ -4,7 +4,7 @@
   "useTabs": false,
   "semi": true,
   "singleQuote": true,
-  "svelteSortOrder": "scripts-markup-styles",
+  "svelteSortOrder": "options-scripts-markup-styles",
   "svelteBracketNewLine": false,
   "svelteAllowShorthand": true,
   "svelteIndentScriptAndStyle": true
