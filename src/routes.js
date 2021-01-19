@@ -10,5 +10,4 @@ export const listingRoutes = {
 export const postRoutes = {
   post: regexparam('/r/:subreddit/comments/:postid/:title'),
   comment: regexparam('/r/:subreddit/comments/:postid/:title/:commentid'),
-  wild: regexparam('/r/:subreddit/comments/:postid/:title/*'),
 };

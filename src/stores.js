@@ -25,7 +25,7 @@ export const listingPath = derived(
     if (listingRoute) {
       set(appendQuery($location, $querystring));
     } else if (!get(listingPath) && postRoute) {
-      const params = exec($location, postRoutes.wild);
+      const params = exec($location, postRoute);
       set(appendQuery(`/r/${params.subreddit}`, $querystring));
     }
   }

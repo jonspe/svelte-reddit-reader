@@ -20,12 +20,20 @@ export const getUtcDate = function (utcSeconds) {
   return date;
 };
 
+/**
+ * Escapes HTML, primarily for &amp; and &gt; type stuff
+ * @param {string} html
+ */
 export const decodeHtml = function (html) {
   var txt = document.createElement('textarea');
   txt.innerHTML = html;
   return txt.value;
 };
 
+/**
+ * Transforms path into proper url for fetching from Reddit JSON API
+ * @param {string} path
+ */
 export const getRedditJsonUrl = function (path) {
   const [url, query] = path.split('?');
   if (query) {
@@ -35,15 +43,35 @@ export const getRedditJsonUrl = function (path) {
   }
 };
 
-// Decodes HTML string from Reddit to display, removes empty paragraphs
-export const formatRedditHtml = function (html) {
-  return decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''))
+/**
+ * Localizes external compatible reddit links to this website
+ * @param {string} text
+ * @returns {string}
+ */
+export const localizeRedditLinks = function (text) {
+  return text
     .replaceAll('href="https://www.reddit.com/r/', 'href="#/r/')
     .replaceAll('href="/r/', 'href="#/r/')
     .replaceAll('href="r/"', 'href="#/r/');
 };
 
-// Test if any of the patterns in routes matches path, and return that route
+/**
+ * Escapes HTML from reddit API, removing empty paragraphs and localizes links
+ * @param {string} html
+ * @returns {string}
+ */
+export const formatRedditHtml = function (html) {
+  return localizeRedditLinks(
+    decodeHtml(html.replaceAll('&lt;p&gt;&amp;#x200B;&lt;/p&gt;', ''))
+  );
+};
+
+/**
+ * Tests if any of the patterns in routes matches path, and return that route
+ * @param {string} path
+ * @param {object} routes
+ * @returns {(object|false)}
+ */
 export const testAny = function (path, routes) {
   for (const key in routes) {
     if (routes[key].pattern.test(path)) {
@@ -53,7 +81,12 @@ export const testAny = function (path, routes) {
   return false;
 };
 
-// Execute regexparam, get params
+/**
+ * Parses parameters from regexparam path
+ * @param {string} path
+ * @param {object} result
+ * @returns {object}
+ */
 export const exec = function (path, result) {
   let i = 0;
   let out = {};
@@ -65,6 +98,11 @@ export const exec = function (path, result) {
   return out;
 };
 
+/**
+ * Appends a query string at the end of an url
+ * @param {string} url
+ * @param {string} query
+ */
 export const appendQuery = function (url, query) {
   if (!query) {
     return url;
@@ -74,6 +112,11 @@ export const appendQuery = function (url, query) {
   return `${url}?${query}`;
 };
 
+/**
+ * Convenience function for setting an interval callback in Svelte components
+ * @param {function} callback
+ * @param {number} milliseconds
+ */
 export function onInterval(callback, milliseconds) {
   const interval = setInterval(callback, milliseconds);
 
