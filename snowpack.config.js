@@ -7,8 +7,10 @@ module.exports = {
   plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-dotenv'],
   routes: [],
   optimize: {
-    bundle: true,
+    splitting: true,
     minify: true,
+    treeshake: true,
+    target: 'es2020',
   },
   packageOptions: {},
   devOptions: {},
