@@ -117,6 +117,7 @@ button:focus {
   bottom: 0;
   z-index: 4;
   padding: 16px;
+  background: #00000066;
 }
 
 ul {

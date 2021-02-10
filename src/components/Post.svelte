@@ -1,6 +1,6 @@
 <script>
-  import { fly, slide } from 'svelte/transition';
-  import { quartInOut } from 'svelte/easing';
+  import { fly, slide, fade } from 'svelte/transition';
+  import { quartInOut, quadInOut } from 'svelte/easing';
   import { decodeHtml } from '../util';
   import { fetchPostWithComments } from '../api';
   import { listingPath } from '../stores';
@@ -11,8 +11,13 @@
   $: promise = fetchPostWithComments(url);
 </script>
 
-<div class="modal-backdrop" on:click={() => push($listingPath)}>
-  <article on:click|stopPropagation transition:fly={{ y: 60, duration: 300 }}>
+<div
+  class="modal-backdrop"
+  on:click={() => push($listingPath)}
+  transition:fade={{ duration: 300, easing: quadInOut }}>
+  <article
+    on:click|stopPropagation
+    transition:fly={{ duration: 400, y: 80, opacity: 1 }}>
     <header>
       <h2>
         {#await promise}
@@ -100,7 +105,6 @@
     max-width: 40rem;
     width: 100%;
     border-radius: 12px;
-    box-shadow: 0 0 0 8000px #00000066;
   }
   @media (max-width: 30rem) {
     article {
