@@ -3,7 +3,7 @@
   import { formatRedditHtml, getDurationString, getUtcDate } from '../util';
 
   export let comment;
-  $: collapsed = comment.depth > 2;
+  $: collapsed = comment.depth === 2 || comment.depth === 5;
   $: postDate = getDurationString(getUtcDate(comment.created_utc), new Date());
   $: replies = comment.replies
     ? comment.replies.data.children.filter((r) => r.kind === 't1')
