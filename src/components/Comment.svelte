@@ -6,7 +6,7 @@
   $: collapsed = comment.depth === 2 || comment.depth === 5;
   $: postDate = getDurationString(getUtcDate(comment.created_utc), new Date());
   $: replies = comment.replies
-    ? comment.replies.data.children.filter((r) => r.kind === 't1')
+    ? comment.replies.children.filter((r) => r.kind === 't1')
     : [];
 
   function toggleCollapsed() {
@@ -19,8 +19,8 @@
     {#if comment.author === '[deleted]'}
       <span class="author">[deleted]</span>
     {:else}
-      <a use:link class="author" href={'/user/' + comment.author}
-        >{comment.author}
+      <a use:link class="author" href={'/user/' + comment.author}>
+        {comment.author}
       </a>
     {/if}
     <span class="score">{comment.score} points</span>
@@ -40,7 +40,7 @@
   {#if replies.length !== 0 && !collapsed}
     <ul>
       {#each replies as reply}
-        <svelte:self comment={reply.data} />
+        <svelte:self comment={reply} />
       {/each}
     </ul>
   {/if}

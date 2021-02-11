@@ -38,13 +38,14 @@
           in:slide={{ delay: -360, duration: 1000, easing: quartInOut }}>
           {#each data.comments as comment}
             {#if comment.kind === 't1'}
-              <Comment comment={comment.data} />
+              <Comment {comment} />
             {/if}
           {:else}
             <li>No comments to load.</li>
           {/each}
         </ul>
       {:catch err}
+        {err}
         <div class="container" style="color: red">
           The requested post could not be found.
         </div>

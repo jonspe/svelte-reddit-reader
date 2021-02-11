@@ -8,7 +8,6 @@
   } from '../util';
 
   export let post;
-  export let kind;
   export let showSubreddit;
   export let index = 0;
   $: postDate = getDurationString(getUtcDate(post.created_utc), new Date());
@@ -56,13 +55,13 @@
       </div>
     </a>
   </header>
-  {#if kind === 't1'}
+  {#if post.kind === 't1'}
     <section class="container">
       <div class="text-content">
         {@html formatRedditHtml(post.body_html)}
       </div>
     </section>
-  {:else if kind === 't3'}
+  {:else if post.kind === 't3'}
     {#if !post.is_self}
       <section class="image-container">
         <a href={post.url_overridden_by_dest || post.url} target="_blank">

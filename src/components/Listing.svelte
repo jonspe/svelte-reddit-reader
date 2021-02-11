@@ -51,8 +51,7 @@
   }, FETCH_INTERVAL);
 
   export let url;
-  $: promise = fetchPostListing(url).then(afterFetch);
-  $: promises = [promise];
+  $: promises = [fetchPostListing(url).then(afterFetch)];
   $: url, (lastRefreshed = Date.now());
 </script>
 
@@ -60,11 +59,7 @@
   {#await promise then listing}
     <div class="card-columns" out:fade>
       {#each listing.children as post, i}
-        <Card
-          post={post.data}
-          kind={post.kind}
-          showSubreddit={$isMultiListing}
-          index={i} />
+        <Card {post} showSubreddit={$isMultiListing} index={i} />
       {/each}
     </div>
   {:catch err}
