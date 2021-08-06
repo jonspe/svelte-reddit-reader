@@ -1,4 +1,5 @@
 <script>
+  import Comment from './Comment.svelte';
   import { decodeHtml, formatRedditHtml } from '../util';
 
   const PREVIEW_QUALITY = 3;
@@ -38,7 +39,7 @@
 {#if post.kind === 't1'}
   <section class="container">
     <div class="text-content">
-      {@html formatRedditHtml(post.body_html)}
+      <Comment comment={post} />
     </div>
   </section>
 {:else if post.kind === 't3'}

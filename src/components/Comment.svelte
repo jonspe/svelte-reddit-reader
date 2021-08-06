@@ -56,6 +56,12 @@
     list-style-type: none;
     margin-bottom: 1rem;
   }
+  li:last-child {
+    margin-bottom: 0rem;
+  }
+  header > a {
+    color: black;
+  }
   button {
     font-family: monospace;
     position: absolute;

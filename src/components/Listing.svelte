@@ -70,7 +70,9 @@
         This subreddit is empty.
       {:else if err.message === 'end'}
         No more posts to load.
-      {:else}An error occurred fetching the subreddit listing. {err}{/if}
+      {:else}
+        An error occurred fetching the subreddit listing. {err}
+      {/if}
     </span>
     <br />
     <a use:link href="/">Return to frontpage</a>

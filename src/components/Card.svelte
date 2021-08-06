@@ -14,18 +14,26 @@
   <header>
     <a href={'#' + post.permalink}>
       <h2>{decodeHtml(post.title || post.link_title)}</h2>
-      <div class="banner">
-        <span>{post.score} points</span>
-        <span>{postDate}</span>
-      </div>
+      {#if post.kind !== 't1'}
+        <div class="banner">
+          <span>{post.score} points</span>
+          <span>{postDate}</span>
+        </div>
+      {/if}
     </a>
   </header>
   <Preview {post} />
   <footer>
     {#if showSubreddit}
       <a href={'#/r/' + post.subreddit}>at {post.subreddit}</a>
-    {:else}<a href={'#/user/' + post.author}>by {post.author}</a>{/if}
-    <a href={'#' + post.permalink}>{post.num_comments} comments</a>
+    {:else}
+      <a href={'#/user/' + post.author}>by {post.author}</a>
+    {/if}
+    {#if post.kind === 't1'}
+      <a href={'#' + post.permalink + '?context=3'}>context</a>
+    {:else}
+      <a href={'#' + post.permalink}>{post.num_comments} comments</a>
+    {/if}
   </footer>
 </article>
 
@@ -40,9 +48,11 @@
     break-inside: avoid;
     margin-bottom: 32px;
   }
+  header > a {
+    padding: 1rem 1.2rem;
+  }
   h2 {
     margin: 0;
-    padding: 1rem 1.2rem 0.4rem 1.2rem;
     font-size: 1.2rem;
     font-weight: 600;
   }
@@ -50,7 +60,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 1.2rem 1rem 1.2rem;
+    padding-top: 0.3rem;
   }
   .banner > * {
     margin: 0;
