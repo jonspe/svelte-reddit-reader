@@ -51,7 +51,7 @@
     </section>
   {:else if post.is_self && !post.selftext_html}
     <section class="image-container">
-      <a href={post.permalink}> <img {...preview} alt="" /> </a>
+      <a href={'#' + post.permalink}> <img {...preview} alt="" /> </a>
     </section>
   {:else if post.is_self && post.selftext_html}
     <section class="container">
