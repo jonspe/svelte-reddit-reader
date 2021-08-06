@@ -8,9 +8,9 @@ module.exports = {
   routes: [],
   optimize: {
     bundle: true,
-    splitting: true,
+    splitting: false,
     minify: true,
-    treeshake: true,
+    treeshake: false,
     target: 'es2020',
   },
   packageOptions: {},
