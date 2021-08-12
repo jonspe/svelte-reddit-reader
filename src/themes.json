@@ -48,19 +48,47 @@
     "darksouls3",
     "apexlegends",
     "2007scape",
-    "runescape"
+    "runescape",
+    "skyrim",
+    "hearthstone",
+    "GlobalOffensive",
+    "leagueoflegends",
+    "wow",
+    "DotA2",
+    "Minecraft",
+    "pokemon",
+    "smashbros",
+    "tf2"
   ],
   "phones": [
     "android",
     "ios",
     "apple",
     "oneplus",
-    "huawei"
+    "huawei",
+    "xiaomi",
+    "oppo",
+    "samsung",
+    "motorola",
+    "googlepixel"
   ],
   "cute": [
     "aww",
     "cats",
-    "dogs"
+    "dogs",
+    "babyelephantgifs",
+    "babyrhinogifs",
+    "Rabbits",
+    "otters",
+    "ferrets",
+    "startledcats",
+    "animalsbeingjerks",
+    "Blep",
+    "floof",
+    "animalsbeingderps",
+    "corgi",
+    "Eyebleach",
+    "likeus"
   ],
   "memes": [
     "memes",
