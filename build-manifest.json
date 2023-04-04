@@ -1,0 +1,472 @@
+{
+  "inputs": {
+    "global.css": {
+      "bytes": 2647,
+      "imports": []
+    },
+    "_snowpack/env.js": {
+      "bytes": 97,
+      "imports": []
+    },
+    "_snowpack/pkg/svelte/internal.js": {
+      "bytes": 54799,
+      "imports": []
+    },
+    "dist/components/Post.svelte.css": {
+      "bytes": 977,
+      "imports": []
+    },
+    "_snowpack/pkg/svelte/easing.js": {
+      "bytes": 3939,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "_snowpack/pkg/svelte/transition.js": {
+      "bytes": 6823,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/easing.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "_snowpack/pkg/svelte.js": {
+      "bytes": 212,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/util.js": {
+      "bytes": 3120,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/api.js": {
+      "bytes": 1276,
+      "imports": [
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "_snowpack/pkg/svelte/store.js": {
+      "bytes": 3301,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "_snowpack/pkg/regexparam.js": {
+      "bytes": 762,
+      "imports": []
+    },
+    "_snowpack/pkg/svelte-spa-router.js": {
+      "bytes": 26790,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/store.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/regexparam.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/routes.js": {
+      "bytes": 436,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/regexparam.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/themes.json.proxy.js": {
+      "bytes": 1114,
+      "imports": []
+    },
+    "dist/stores.js": {
+      "bytes": 1605,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/store.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte-spa-router.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/routes.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/themes.json.proxy.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/components/Comment.svelte.css": {
+      "bytes": 893,
+      "imports": []
+    },
+    "dist/components/Comment.svelte.js": {
+      "bytes": 11339,
+      "imports": [
+        {
+          "path": "dist/components/Comment.svelte.css",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte-spa-router.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/components/Post.svelte.js": {
+      "bytes": 15587,
+      "imports": [
+        {
+          "path": "dist/components/Post.svelte.css",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/transition.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/easing.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/api.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/stores.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte-spa-router.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Comment.svelte.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/components/Card.svelte.css": {
+      "bytes": 993,
+      "imports": []
+    },
+    "dist/components/Preview.svelte.css": {
+      "bytes": 362,
+      "imports": []
+    },
+    "dist/components/Preview.svelte.js": {
+      "bytes": 9178,
+      "imports": [
+        {
+          "path": "dist/components/Preview.svelte.css",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Comment.svelte.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/components/Card.svelte.js": {
+      "bytes": 9306,
+      "imports": [
+        {
+          "path": "dist/components/Card.svelte.css",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/transition.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Preview.svelte.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/components/Listing.svelte.js": {
+      "bytes": 12241,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/transition.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte-spa-router.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Card.svelte.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/api.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/util.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/stores.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/components/Navbar.svelte.css": {
+      "bytes": 96,
+      "imports": []
+    },
+    "dist/components/Navbar.svelte.js": {
+      "bytes": 2560,
+      "imports": [
+        {
+          "path": "dist/components/Navbar.svelte.css",
+          "kind": "import-statement"
+        },
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/themes.json.proxy.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/App.svelte.js": {
+      "bytes": 3836,
+      "imports": [
+        {
+          "path": "_snowpack/pkg/svelte/internal.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Post.svelte.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Listing.svelte.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/stores.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/components/Navbar.svelte.js",
+          "kind": "import-statement"
+        }
+      ]
+    },
+    "dist/index.js": {
+      "bytes": 539,
+      "imports": [
+        {
+          "path": "_snowpack/env.js",
+          "kind": "import-statement"
+        },
+        {
+          "path": "dist/App.svelte.js",
+          "kind": "import-statement"
+        }
+      ]
+    }
+  },
+  "outputs": {
+    "../~~bundle~~/global.css": {
+      "imports": [],
+      "inputs": {
+        "global.css": {
+          "bytesInOutput": 2073
+        }
+      },
+      "bytes": 2074
+    },
+    "../~~bundle~~/dist/index.js": {
+      "imports": [],
+      "exports": [
+        "default"
+      ],
+      "inputs": {
+        "_snowpack/env.js": {
+          "bytesInOutput": 100
+        },
+        "_snowpack/pkg/svelte/internal.js": {
+          "bytesInOutput": 9096
+        },
+        "dist/components/Post.svelte.css": {
+          "bytesInOutput": 0
+        },
+        "_snowpack/pkg/svelte/easing.js": {
+          "bytesInOutput": 165
+        },
+        "_snowpack/pkg/svelte/transition.js": {
+          "bytesInOutput": 1006
+        },
+        "_snowpack/pkg/svelte.js": {
+          "bytesInOutput": 0
+        },
+        "dist/util.js": {
+          "bytesInOutput": 1054
+        },
+        "dist/api.js": {
+          "bytesInOutput": 527
+        },
+        "_snowpack/pkg/svelte/store.js": {
+          "bytesInOutput": 751
+        },
+        "_snowpack/pkg/regexparam.js": {
+          "bytesInOutput": 436
+        },
+        "_snowpack/pkg/svelte-spa-router.js": {
+          "bytesInOutput": 1211
+        },
+        "dist/routes.js": {
+          "bytesInOutput": 254
+        },
+        "dist/themes.json.proxy.js": {
+          "bytesInOutput": 1081
+        },
+        "dist/stores.js": {
+          "bytesInOutput": 431
+        },
+        "dist/components/Comment.svelte.css": {
+          "bytesInOutput": 0
+        },
+        "dist/components/Comment.svelte.js": {
+          "bytesInOutput": 3598
+        },
+        "dist/components/Post.svelte.js": {
+          "bytesInOutput": 5172
+        },
+        "dist/components/Card.svelte.css": {
+          "bytesInOutput": 0
+        },
+        "dist/components/Preview.svelte.css": {
+          "bytesInOutput": 0
+        },
+        "dist/components/Preview.svelte.js": {
+          "bytesInOutput": 3165
+        },
+        "dist/components/Card.svelte.js": {
+          "bytesInOutput": 3159
+        },
+        "dist/components/Listing.svelte.js": {
+          "bytesInOutput": 3948
+        },
+        "dist/components/Navbar.svelte.css": {
+          "bytesInOutput": 0
+        },
+        "dist/components/Navbar.svelte.js": {
+          "bytesInOutput": 883
+        },
+        "dist/App.svelte.js": {
+          "bytesInOutput": 1029
+        },
+        "dist/index.js": {
+          "bytesInOutput": 63
+        }
+      },
+      "bytes": 38053
+    },
+    "../~~bundle~~/dist/index.css": {
+      "imports": [],
+      "inputs": {
+        "dist/components/Navbar.svelte.css": {
+          "bytesInOutput": 95
+        },
+        "dist/components/Post.svelte.css": {
+          "bytesInOutput": 975
+        },
+        "dist/components/Card.svelte.css": {
+          "bytesInOutput": 989
+        },
+        "dist/components/Comment.svelte.css": {
+          "bytesInOutput": 891
+        },
+        "dist/components/Preview.svelte.css": {
+          "bytesInOutput": 359
+        }
+      },
+      "bytes": 3310
+    }
+  }
+}
