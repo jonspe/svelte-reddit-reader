@@ -15,4 +15,3 @@
   {/if}
   <Listing url={$listingFetchPath} />
 </main>
-<footer>Made with Svelte, by Joona Perasto. 2021.</footer>
